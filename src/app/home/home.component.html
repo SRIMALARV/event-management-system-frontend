@@ -1,0 +1,36 @@
+<nav class="navbar">
+    <h1>Event Hub</h1>
+    <ul>
+        <li>Home</li>
+        <li>Events</li>
+        <li>Host</li>
+    </ul>
+    <button class="login-btn" routerLink="auth">Sign up</button>
+</nav>
+<div class="container">
+    <div class="text-section">
+        <div style="width: 500px;">
+            <h2>Unleash Extraordinary Events with Ease!</h2>
+        </div>
+        <p>Explore upcoming conferences, hackathons, and competitions. Stay updated on the latest events!</p>
+        <div class="buttons">
+            <button class="register">Register events</button>
+            <button class="know-more">Know more →</button>
+        </div>
+    </div>
+    <div class="image-section">
+        <img src="Projections-amico.png" class="home-image">
+    </div>
+</div>
+<div class="cards-container">
+    <button class="scroll-btn left" (click)="scrollLeft()">&#10094;</button>
+    <div class="scroll-wrapper" #scrollContainer>
+        <div class="card" *ngFor="let event of eventList">
+            <div class="card-content">
+                <span>{{ event.name }}</span>
+                <img [src]="event.img" alt="{{ event.name }}" />
+            </div>
+        </div>
+    </div>
+    <button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
+</div>
