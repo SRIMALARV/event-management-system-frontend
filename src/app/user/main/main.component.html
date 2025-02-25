@@ -1,0 +1,32 @@
+<nav class="navbar">
+    <div class="title">
+        <img src="logo.png" class="logo">
+        <h1>Event Hub</h1>
+    </div>
+    <input type="text" placeholder="Search Event...">
+
+    <ul>
+        <li>Home</li>
+        <li>Events</li>
+        <li>Host</li>
+    </ul>
+    <div class="user-profile">
+        <img src="profile.png" class="user-profile">
+        <span>{{ username }}</span>
+    </div>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+</nav>
+<div class="event-container">
+    <div class="event-list">
+        <div class="event-card" *ngFor="let event of events" (click)="selectEvent(event)">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.date }} | {{ event.location }}</p>
+        </div>
+    </div>
+    <div class="event-details" *ngIf="selectedEvent">
+        <h2>{{ selectedEvent.title }}</h2>
+        <p><strong>Date:</strong> {{ selectedEvent.date }}</p>
+        <p><strong>Location:</strong> {{ selectedEvent.location }}</p>
+        <p><strong>Description:</strong> {{ selectedEvent.description }}</p>
+    </div>
+</div>

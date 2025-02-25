@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TestComponent } from './test/test.component';
+import { MainComponent } from './main/main.component';
+import { AuthGuard } from '../auth.guard';
 
 const routes: Routes = [
-  {path:'', component: TestComponent }
+  {path:'', component: MainComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

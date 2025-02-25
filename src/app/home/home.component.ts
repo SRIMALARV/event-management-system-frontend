@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +14,9 @@ import { AuthService } from '../auth/auth.service';
 export class HomeComponent {
   username: string | null = null;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,private router: Router) { }
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
-    console.log("here:",localStorage.getItem('username'));
-    this.authService.username$.subscribe(name => {
-      this.username = name;
-    });
   }
 @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
 
@@ -39,7 +36,31 @@ export class HomeComponent {
     this.scrollContainer.nativeElement.scrollBy({ left: 260, behavior: 'smooth' });
   }
 
+  navigateTo(route: string) {
+    const token = localStorage.getItem('token'); 
+
+    if (token) {
+      this.router.navigate([route]); 
+    } else {
+      Swal.fire({
+      title: 'Access Denied!',
+      text: 'You must be logged in to access this page.',
+      icon: 'warning',
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: true,
+      confirmButtonText: 'Login',
+      timer: 4000
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/auth']); 
+      }
+    });
+  }
+  }
+
   logout() {
     this.authService.logout();
+    window.location.reload();
   }
 }

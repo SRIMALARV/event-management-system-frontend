@@ -5,14 +5,14 @@
     </div>
     <ul>
         <li>Home</li>
-        <li>Events</li>
-        <li>Host</li>
+        <li (click)="navigateTo('user')">Events</li>
+        <li (click)="navigateTo('user')">Host</li>
     </ul>
     <div *ngIf="username; else showSignup" class="user-info">
         <div class="user-profile">
-        <img src="profile.png" class="user-profile">
-        <span>{{ username }}</span>
-    </div>
+            <img src="profile.png" class="user-profile">
+            <span>{{ username }}</span>
+        </div>
         <button class="logout-btn" (click)="logout()">Logout</button>
     </div>
 
@@ -28,8 +28,8 @@
         <p>Explore upcoming conferences, symposiums, hackathons, and competitions. Stay updated on the latest events!
         </p>
         <div class="buttons">
-            <button class="register">Register events</button>
-            <button class="know-more">Know more →</button>
+            <button class="register" (click)="navigateTo('user')">Register events</button>
+            <button class="know-more" (click)="navigateTo('user')">Know more →</button>
         </div>
     </div>
     <div class="image-section">
