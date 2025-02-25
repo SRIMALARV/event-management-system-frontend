@@ -20,13 +20,14 @@ body {
 }
 
 .container {
-    width: 800px;
-    height: 500px;
+    width: 700px;
+    height: 450px;
     display: flex;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
     justify-content: center;
+    margin: 60px 300px;
 }
 
 .left-section {
@@ -55,7 +56,7 @@ body {
 
 .sign-in-btn:hover {
     background: white;
-    color: #00aaff;
+    color: #9000ff;
 }
 
 .right-section {
@@ -66,6 +67,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 40px;
+    text-align: center;
 }
 
 h2 {
@@ -128,9 +130,14 @@ p {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
-    width: 100%;
+    width: 70%;
+    justify-content: center;
 }
 
 .sign-up-btn:hover {
     background: #6300cc;
+}
+
+.error {
+    color: red;
 }

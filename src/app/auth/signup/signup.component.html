@@ -1,32 +1,26 @@
 
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-    <div class="container">
-        <div class="left-section">
-            <h1>Already an user?</h1>
-            <p>Please login with your personal info to continue!</p>
-            <button class="log-in-btn" routerLink="login">LOG IN</button>
-        </div>
-        <div class="right-section">
-            <h2>Create Account</h2>
-            <p>or use your email for registration:</p>
-            <form>
-                <div class="input-group">
-                    <i class="fa fa-user"></i>
-                    <input type="text" placeholder="Name" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa fa-envelope"></i>
-                    <input type="email" placeholder="Email" required>
-                </div>
-                <div class="input-group">
-                    <i class="fa fa-lock"></i>
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="sign-up-btn">SIGN UP</button>
-            </form>
-        </div>
+<div class="container">
+    <div class="left-section">
+        <h1>Already a user?</h1>
+        <p>Please login with your personal info to continue!</p>
+        <button class="log-in-btn" routerLink="/auth/login">Log In</button>
     </div>
-
-
+    <div class="right-section">
+        <h2>Create Account</h2>
+        <form (submit)="onSignup()">
+            <div class="input-group">
+                <i class="fa fa-user"></i>
+                <input type="text" placeholder="Name" [(ngModel)]="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <i class="fa fa-envelope"></i>
+                <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <i class="fa fa-lock"></i>
+                <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+            </div>
+            <button type="submit" class="sign-up-btn">Sign Up</button>
+        </form>
+    </div>
+</div>

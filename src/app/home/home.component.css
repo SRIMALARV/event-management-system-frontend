@@ -33,10 +33,20 @@ body {
     z-index: 1000;
 }
 
+.title {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    gap: 2px;
+}
+
 .navbar h1 {
     color: rgb(78, 15, 154);
     font-size: 24px;
-    margin-left: 30px;
+}
+
+.logo {
+    width: 50px;
 }
 
 .navbar ul {
@@ -58,12 +68,13 @@ body {
     text-underline-offset: 8px;
 }
 
-.login-btn {
+.login-btn, .logout-btn {
     background-color: white;
     border: 1.5px solid rgb(78, 15, 154);
     color: rgb(78, 15, 154);
     border-radius: 25px;
     padding: 10px 20px;
+    cursor: pointer;
 }
 
 .container {
@@ -199,68 +210,19 @@ body {
     right: 10px;
 }
 
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 9;
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
-.blurred {
-    filter: blur(5px);
-    pointer-events: none;
+.user-profile img {
+    width: 25px;
+    margin-left: 30px;
 }
-
-.login-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-    width: 400px;
-    height: 300px;
-    text-align: center;
-}
-
-.login-popup input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.signup-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #6228b5;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 5px;
-    width: 50%;
-}
-
-.login-popup p {
-    cursor: pointer;
-    color: #6228b5;
-    text-decoration: underline;
-}
-
-.close-btn {
-    background-color: white;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    position: absolute;
-    top: 5px;
-    right: 10px;
+.user-profile {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
 }
