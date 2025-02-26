@@ -1,33 +1,43 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { EventApiService } from '../event-api.service';
+import { Event } from '../../model/event.model'; 
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent {
   username: string | null = null;
-  constructor(private authService: AuthService, private router: Router) {}
+  events: Event[] | null =null;
+  selectedEvent: Event |null  = null;
+  
+  constructor(private authService: AuthService, private router: Router,
+              private eventApiService: EventApiService) {}
 
   ngOnInit() {
   this.username = localStorage.getItem('username');
+  this.loadEvents();
   }
 
-  events = [
-    { title: 'Tech Conference', date: '2025-03-10', location: 'NYC', description: 'A conference about technology trends.' },
-    { title: 'Startup Meetup', date: '2025-04-15', location: 'San Francisco', description: 'Networking event for startups.' },
-    { title: 'AI Workshop', date: '2025-05-20', location: 'Chicago', description: 'Hands-on AI training session.' }
-  ];
-
-  selectedEvent: any = null;
-
-  selectEvent(event: any) {
-    this.selectedEvent = event;
+  loadEvents(): void {
+    this.eventApiService.getAllEvents().subscribe({
+      next: (data) => {
+        this.events = data;
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
+  
+
+
 
   logout() {
     this.authService.logout();
