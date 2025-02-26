@@ -13,12 +13,16 @@
             <img src="profile.png" class="user-profile">
             <span>{{ username }}</span>
         </div>
+        <div *ngIf="role === 'ROLE_ADMIN'">
+            <li routerLink="admin">Dashboard</li>
+        </div>
         <button class="logout-btn" (click)="logout()">Logout</button>
     </div>
-
+    
     <ng-template #showSignup>
         <button class="login-btn" routerLink="auth">Sign up</button>
     </ng-template>
+    
 </nav>
 <div class="container">
     <div class="text-section">

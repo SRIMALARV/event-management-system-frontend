@@ -13,10 +13,12 @@ import Swal from 'sweetalert2';
 })
 export class HomeComponent {
   username: string | null = null;
+  role: string | null = null;
 
   constructor(private authService: AuthService,private router: Router) { }
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
+    this.role = localStorage.getItem('role');
   }
 @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
 
@@ -25,7 +27,7 @@ export class HomeComponent {
     { name: 'Conferences', img: 'conference.png' },
     { name: 'Symposiums', img: 'sympo.png' },
     { name: 'Hackathons', img: 'hackathon.png' },
-    { name: 'Cultural Fests', img: 'fest.png' }
+    { name: 'Workshops', img: 'workshop.png' }
   ];
 
   scrollLeft() {

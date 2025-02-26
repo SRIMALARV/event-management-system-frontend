@@ -25,19 +25,19 @@ export class LoginComponent {
         console.log('Login Success:', response);
         this.authService.setToken(response.token);
         this.authService.setRole(response.roles[0]);
-        // Swal.mixin({
-        //   toast: true,
-        //   position: 'top-end',
-        //   showConfirmButton: false,
-        //   timer: 2000,
-        //   timerProgressBar: true,
-        //   customClass: {
-        //     popup: 'swal-success-toast'
-        //   }
-        // }).fire({
-        //   icon: 'success',
-        //   title: `Welcome, ${this.username}!`
-        // });
+        Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          customClass: {
+            popup: 'swal-success-toast'
+          }
+        }).fire({
+          icon: 'success',
+          title: `Welcome, ${this.username}!`
+        });
         this.redirectUser(response.roles[0]);
       }, 
       (error) => {

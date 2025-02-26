@@ -21,7 +21,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 50px;
+    padding: 25px 40px;
     background-color: white;
     border-bottom: 1px solid #ddd;
     width: 100%;
@@ -49,18 +49,18 @@ body {
 }
 
 .navbar ul {
-    list-style: none;
     display: flex;
     gap: 20px;
-    margin-left: 500px;
+    margin-left: 400px;
 }
 
-.navbar ul li {
+li {
     cursor: pointer;
+    list-style: none;
     margin-left: 30px;
 }
 
-.navbar ul li:hover {
+li:hover {
     text-decoration: underline;
     text-decoration-color: black;
     text-decoration-thickness: 2px;

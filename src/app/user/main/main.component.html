@@ -1,13 +1,13 @@
 <nav class="navbar">
-    <div class="title">
+    <div class="title" routerLink="/">
         <img src="logo.png" class="logo">
         <h1>Event Hub</h1>
     </div>
-    <input type="text" placeholder="Search Event...">
+    <input type="text" (keyup)="searchEvents($event)" placeholder="Search events..." />
 
     <ul>
-        <li>Home</li>
-        <li>Events</li>
+        <li routerLink="/">Home</li>
+        <li>Registered</li>
         <li>Host</li>
     </ul>
     <div class="user-profile">
@@ -16,17 +16,61 @@
     </div>
     <button class="logout-btn" (click)="logout()">Logout</button>
 </nav>
+<div class="filter-options">
+    <div class="dropdown">
+        <button class="dropdown-btn" (click)="toggleDropdown()">
+            {{ selectedType }} ▼
+        </button>
+        <ul class="dropdown-menu" *ngIf="dropdownOpen">
+            <li (click)="filterByType('All Events')">All Events</li>
+            <li (click)="filterByType('Conference')">Conference</li>
+            <li (click)="filterByType('Symposium')">Symposium</li>
+            <li (click)="filterByType('Hackathon')">Hackathon</li>
+            <li (click)="filterByType('Competition')">Competition</li>
+            <li (click)="filterByType('Workshop')">Workshop</li>
+        </ul>
+    </div>
+    <div class="dropdown">
+        <button class="dropdown-btn" (click)="toggleSortDropdown()">
+            Sort by: {{ selectedSort }} ▼
+        </button>
+        <ul class="dropdown-menu" *ngIf="dropdownOpenSort">
+            <li (click)="sortEvents('asc')">Recent</li>
+            <li (click)="sortEvents('desc')">Old</li>
+        </ul>
+    </div>
+</div>
 <div class="event-container">
     <div class="event-list">
-        <div class="event-card" *ngFor="let event of events" >
-            <h3>{{ event.title }}</h3>
-            <p>{{ event.type }} | {{ event.location }}</p>
+        <div class="event-card" *ngFor="let event of filteredEvents" (click)="event.id ? selectEvent(event.id) : null" [class.selected]="event.id === selectedEventId">
+            <div class="event-content">
+                <img [src]="getEventImage(event.type)" alt="Event Icon" class="event-icon">
+                <div class="event-text">
+                    <h3>{{ event.title }}</h3>
+                    <p>{{ event.type }} | {{ event.eventDate }}</p>
+                    <p>{{ event.instituteName }}</p>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- <div class="event-details" *ngIf="selectedEvent">
-        <h2>{{ selectedEvent.title }}</h2>
-        <p><strong>Date:</strong> {{ selectedEvent.date }}</p>
-        <p><strong>Location:</strong> {{ selectedEvent.location }}</p>
-        <p><strong>Description:</strong> {{ selectedEvent.description }}</p>
-    </div> -->
+
+    <div class="event-details" *ngIf="selectedEvent">
+        <div class="event-details-card">
+            <div class="event-details-title">
+            <img [src]="getEventImage(selectedEvent.type)" alt="Event Icon" class="event-icon">
+            <h2>{{ selectedEvent.title }}</h2>
+            </div>
+            <p><strong>Event Type:</strong> {{ selectedEvent.type }}</p>
+            <p><strong>Date:</strong> {{ selectedEvent.eventDate }}</p>
+            <p><strong>Deadline:</strong> {{ selectedEvent.registrationDeadline }}</p>
+            <p><strong>Event Mode:</strong> {{ selectedEvent.eventMode }}</p>  
+            <p><strong>Location:</strong> {{ selectedEvent.location }}</p>   
+            <p><strong>Team Size:</strong> {{ selectedEvent.minParticipants }} - {{ selectedEvent.maxParticipants }}</p>       
+            <p><strong>Registration Fee:</strong> {{ selectedEvent.fee }}</p>
+            <p><strong>Organization:</strong> {{ selectedEvent.instituteName }}</p>
+            <p><strong>Description:</strong> {{ selectedEvent.description }}</p>            
+            <p><strong>Contact:</strong> {{ selectedEvent.contactDetails }}</p>
+
+        </div>
+    </div>
 </div>
