@@ -61,18 +61,41 @@
                 <img [src]="getEventImage(selectedEvent.type)" alt="Event Icon" class="event-icon">
                 <h2>{{ selectedEvent.title }}</h2>
             </div>
-            <p><strong>Organization:</strong> {{ selectedEvent.instituteName }}</p>
-            <p><strong>Event Type:</strong> {{ selectedEvent.type }}</p>
-            <p><strong>Date:</strong> {{ selectedEvent.eventDate }}</p>
-            <p><strong>Time:</strong> {{ selectedEvent.eventTime }}</p>
-            <p><strong>Event Duration:</strong> {{ selectedEvent.eventDuration }} minutes</p>
-            <p><strong>Deadline:</strong> {{ selectedEvent.registrationDeadline }}</p>
-            <p><strong>Event Mode:</strong> {{ selectedEvent.eventMode }}</p>
-            <p *ngIf="selectedEvent.location"><strong>Location:</strong> {{ selectedEvent.location }}</p>
-            <p><strong>Team Size:</strong> {{ selectedEvent.minParticipants }} - {{ selectedEvent.maxParticipants }}</p>
-            <p *ngIf="selectedEvent.fee"><strong>Registration Fee:</strong> {{ selectedEvent.fee }}</p>            
-            <p><strong>What is this event about?:<br></strong> {{ selectedEvent.description }}</p>
-            <p><strong>Contact:</strong> {{ selectedEvent.contactDetails }}</p>
+
+            <div class="event-info">
+                <p><i class="fas fa-building"></i> <strong>Organization:</strong> {{ selectedEvent.instituteName }}</p>
+                <p><i class="fas fa-tag"></i> <strong>Event Type:</strong> {{ selectedEvent.type }}</p>
+            </div>
+
+            <div class="event-datetime">
+                <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> {{ selectedEvent.eventDate }}</p>
+                <p><i class="fas fa-exclamation-circle"></i> <strong>Deadline:</strong> {{
+                    selectedEvent.registrationDeadline }}</p>
+            </div>
+
+            <div class="event-duration">
+                <p><i class="fas fa-clock"></i> <strong>Time:</strong> {{ selectedEvent.eventTime }}</p>
+                <p><i class="fas fa-hourglass-half"></i> <strong>Duration:</strong> {{ selectedEvent.eventDuration }}
+                    minutes</p>
+            </div>
+
+            <div class="event-location">
+                <p><i class="fas fa-globe"></i> <strong>Event Mode:</strong> {{ selectedEvent.eventMode }}</p>
+                <p *ngIf="selectedEvent.location"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{
+                    selectedEvent.location }}</p>
+            </div>
+
+            <p><i class="fas fa-users"></i> <strong>Team Size:</strong> {{ selectedEvent.minParticipants }} - {{
+                selectedEvent.maxParticipants }}</p>
+
+            <p *ngIf="selectedEvent.fee"><i class="fas fa-money-bill-wave"></i> <strong>Registration Fee:</strong> {{
+                selectedEvent.fee }}</p>
+
+                <p><i class="fas fa-info-circle"></i> <strong>About the Event:</strong></p>
+                <p>{{ selectedEvent.description }}</p>
+
+                <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> {{ selectedEvent.contactDetails }}</p>
         </div>
     </div>
+
 </div>

@@ -1,11 +1,13 @@
-<div>
-    <label>Meeting ID:</label>
-    <input type="text" [(ngModel)]="meetingId" placeholder="Enter Meeting ID" />
+<div class="modal" *ngIf="isModalOpen">
+    <div class="modal-content">
+        <label>Meeting ID:</label>
+        <input type="text" [(ngModel)]="meetingId" placeholder="Enter Meeting ID" />
 
-    <label>Passcode:</label>
-    <input type="text" [(ngModel)]="passcode" placeholder="Enter Passcode" />
+        <label>Passcode:</label>
+        <input type="text" [(ngModel)]="passcode" placeholder="Enter Passcode" />
 
-    <button (click)="joinMeeting()">Join Meeting</button>
+        <button (click)="joinMeeting()">Join</button>
+    </div>
 </div>
 
 <iframe 

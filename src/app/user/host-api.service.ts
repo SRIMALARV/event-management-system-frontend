@@ -20,4 +20,9 @@ export class HostApiService {
     return this.http.get<string[]>(`${this.API_BASE_URL}/api/users/institutes`);
   }
 
+  getUserEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.API_BASE_URL}/api/events/my-events`);
+  }
+  
+
 }

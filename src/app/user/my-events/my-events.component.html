@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>My Events</h2>
+  
+    <div *ngIf="isLoading" class="loading">Loading events...</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  
+    <div class="event-list" *ngIf="myEvents.length > 0">
+      <div class="event-card" *ngFor="let event of myEvents">
+        <h3>{{ event.title }}</h3>
+        <p><strong>Date:</strong> {{ event.eventDate }} at {{ event.eventTime }}</p>
+        <p><strong>Duration:</strong> {{ event.eventDuration }} minutes</p>
+        <p><strong>Mode:</strong> {{ event.eventMode }}</p>
+        <p><strong>Location:</strong> {{ event.location || 'N/A' }}</p>
+        <p><strong>Fee:</strong> {{ event.fee ? '₹' + event.fee : 'Free' }}</p>
+        <p><strong>Participants:</strong> {{ event.minParticipants }} - {{ event.maxParticipants || 'Unlimited' }}</p>
+        <p><strong>Hosted by:</strong> {{ event.instituteName }}</p>
+  
+        <div *ngIf="event.meetUrl">
+          <a [href]="event.meetUrl">Join Meeting</a>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="myEvents.length === 0 && !isLoading" class="no-events">
+        <img src="reload.png" alt="try again" class="loading-image">
+      <p>No events created.</p>
+    </div>
+  </div>
+  

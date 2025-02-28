@@ -8,14 +8,14 @@ import { Event } from '../../model/event.model';
 import { ZoomService } from '../zoom.service';
 
 @Component({
-  selector: 'app-host',
+  selector: 'app-create-event',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet],
-  templateUrl: './host.component.html',
-  styleUrl: './host.component.css'
+  imports: [CommonModule, RouterLink, RouterOutlet, ReactiveFormsModule],
+  templateUrl: './create-event.component.html',
+  styleUrl: './create-event.component.css'
 })
-export class HostComponent {
-  username: string | null = null;
+export class CreateEventComponent {
+ username: string | null = null;
   eventForm!: FormGroup;
   meetingForm: FormGroup;
   meetingDetails: any = null;

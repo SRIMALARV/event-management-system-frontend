@@ -16,10 +16,13 @@ export class JoinEventComponent {
   meetingId: string = '';
   passcode: string = '';
   zoomMeetingUrl: SafeResourceUrl | null = null;
+  isModalOpen: boolean = true;
 
   constructor(private sanitizer: DomSanitizer) {}
 
+
   joinMeeting() {
+    this.isModalOpen = false;
     if (this.meetingId && this.passcode) {
       const url = `https://us05web.zoom.us/wc/${this.meetingId}/join?pwd=${this.passcode}`;
       this.zoomMeetingUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
