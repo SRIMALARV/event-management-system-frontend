@@ -50,7 +50,7 @@ export class LoginComponent {
   redirectUser(role: string): void {
     switch (role) {
       case 'ROLE_ADMIN':
-        this.router.navigate(['admin']);
+        this.router.navigate(['home']);
         break;
       case 'ROLE_ORGANIZATION':
         this.router.navigate(['org']);

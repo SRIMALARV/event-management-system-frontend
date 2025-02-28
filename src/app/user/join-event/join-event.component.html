@@ -1,0 +1,18 @@
+<div>
+    <label>Meeting ID:</label>
+    <input type="text" [(ngModel)]="meetingId" placeholder="Enter Meeting ID" />
+
+    <label>Passcode:</label>
+    <input type="text" [(ngModel)]="passcode" placeholder="Enter Passcode" />
+
+    <button (click)="joinMeeting()">Join Meeting</button>
+</div>
+
+<iframe 
+    *ngIf="zoomMeetingUrl"
+    [src]="zoomMeetingUrl"
+    width="100%" 
+    height="600px"
+    frameborder="0" 
+    allow="camera; microphone; fullscreen">
+</iframe>

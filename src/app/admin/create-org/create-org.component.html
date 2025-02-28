@@ -1,15 +1,15 @@
 <div class="container">
     <div class="left-section">
-        <h1>Already a user?</h1>
-        <p>Please login with your personal info to continue!</p>
-        <button class="sign-in-btn" routerLink="/auth/login">Log In</button>
+        <h1>Edit Existing accounts?</h1>
+        <p>View & Manage Organizations within the portal!</p>
+        <button class="log-in-btn" routerLink="/auth/login">Manage</button>
     </div>
     <div class="right-section">
-        <h2>Create Account</h2>
-        <form (submit)="onSignup()">
+        <h2>Create Organization</h2>
+        <form (submit)="createOrganization()">
             <div class="input-group">
                 <i class="fa fa-user"></i>
-                <input type="text" placeholder="Name" [(ngModel)]="username" name="username" required>
+                <input type="text" placeholder="Organization name" [(ngModel)]="username" name="username" required>
             </div>
             <div class="input-group">
                 <i class="fa fa-envelope"></i>
@@ -19,7 +19,7 @@
                 <i class="fa fa-lock"></i>
                 <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
             </div>
-            <button type="submit" class="sign-up-btn">Sign Up</button>
+            <button type="submit" class="sign-up-btn">Create</button>
         </form>
     </div>
 </div>

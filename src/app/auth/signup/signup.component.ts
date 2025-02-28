@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -24,6 +25,19 @@ export class SignupComponent {
         console.log('Signup Success:', response);
         this.authService.setToken(response.token);
         this.authService.setRole(response.roles[0]); 
+        Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true,
+                  customClass: {
+                    popup: 'swal-success-toast'
+                  }
+                }).fire({
+                  icon: 'success',
+                  title: `Welcome, ${this.username}!`
+                });
         this.router.navigate(['/home']);
       },
       (error) => {

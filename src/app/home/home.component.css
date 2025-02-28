@@ -1,20 +1,6 @@
-@font-face {
-    font-family: 'CustomFont';
-    src: url('https://d8it4huxumps7.cloudfront.net/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'CustomFont', sans-serif;
-}
 
 body {
     background-color: white;
-    font-family: Arial, sans-serif;
 }
 
 .navbar {
@@ -51,7 +37,7 @@ body {
 .navbar ul {
     display: flex;
     gap: 20px;
-    margin-left: 400px;
+    margin-left: 350px;
 }
 
 li {

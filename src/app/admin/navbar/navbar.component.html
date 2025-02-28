@@ -1,0 +1,15 @@
+<nav class="navbar">
+    <div class="title">
+        <img src="logo.png" class="logo">
+        <h1>Event Hub</h1>
+    </div>
+    <ul>
+        <li routerLink="/">Home</li>
+        <li routerLink="user">Events</li>
+    </ul>
+    <div class="user-profile">
+        <img src="admin.png" class="user-profile">
+        <span>{{ username }}</span>
+    </div>
+        <button class="logout-btn" (click)="logout()">Logout</button>
+</nav>
