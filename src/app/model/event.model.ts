@@ -17,4 +17,7 @@ export interface Event {
   meetUrl?: string; 
   meetId?: string; 
   meetPasscode?: string;
+  creatorEmail: string;
+  createdBy?: string;
+  status?: string;
 }

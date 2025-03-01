@@ -45,7 +45,7 @@ export class MainComponent {
   }
 
   loadEvents(): void {
-    this.eventApiService.getAllEvents().subscribe({
+    this.eventApiService.getAllApprovedEvents().subscribe({
       next: (data) => {
         this.events = data;
         this.filteredEvents = [...this.events];

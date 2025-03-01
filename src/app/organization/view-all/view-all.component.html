@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Organization Events</h2>
+    <table class="table table-bordered">
+        <thead class="table-head">
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let event of events">
+                <td>{{ event.title }}</td>
+                <td>{{ event.type }}</td>
+                <td>{{ event.eventDate }}</td>
+                <td [ngClass]="{'approved': event.status === 'approved', 'rejected': event.status === 'rejected',  'pending': event.status === 'pending' }">
+                    {{ event.status }}
+                </td>
+                <td>
+                    <button class="btn btn-info btn-sm" [routerLink]="['view-event', event.id]">View</button>
+                    <button class="btn btn-success btn-sm" (click)="event.id && updateStatus(event.id, 'approved')">Approve</button>
+                    <button class="btn btn-danger btn-sm" (click)="event.id && updateStatus(event.id, 'rejected')">Reject</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -10,7 +10,14 @@
             </small>
 
             <label>Event Type<span>*</span></label>
-            <input type="text" formControlName="type" />
+            <select formControlName="type">
+                <option value="" disabled>Select event type</option>
+                <option>Conference</option>
+                <option>Symposium</option>
+                <option>Competition</option>
+                <option>Workshop</option>
+                <option>Hackathon</option>
+            </select>
             <small *ngIf="eventForm.controls['type'].invalid && eventForm.controls['type'].touched">
                 Event type is required
             </small>
@@ -47,7 +54,7 @@
                 Event time is required
             </small>
 
-            <label>Event Duration</label>
+            <label>Event Duration<span>*</span></label>
             <input type="number" formControlName="eventDuration" placeholder="Duration in minutes" />
             <small *ngIf="eventForm.controls['eventDuration'].invalid && eventForm.controls['eventDuration'].touched">
                 Duration must be atleast 10 minutes
@@ -67,11 +74,11 @@
                 <option value="" disabled>Select mode of event</option>
                 <option>Online</option>
                 <option>Offline</option>
-            </select>            
+            </select>
             <small *ngIf="eventForm.controls['eventMode'].invalid && eventForm.controls['eventMode'].touched">
                 Event mode is required
-            </small>   
-            
+            </small>
+
             <label>Contact Details<span>*</span></label>
             <input type="text" formControlName="contactDetails" placeholder="Coordinator's contact" />
             <small *ngIf="eventForm.controls['contactDetails'].invalid && eventForm.controls['contactDetails'].touched">
@@ -89,14 +96,19 @@
         </div>
         <div *ngIf="step === 4">
             <label>Min Team Size</label>
-            <input type="number" formControlName="minParticipants" required />
-            <small
-                *ngIf="eventForm.controls['minParticipants'].invalid && eventForm.controls['minParticipants'].touched">
+            <input type="number" formControlName="minParticipants" value="1" />
+            <small *ngIf="eventForm.controls['minParticipants'].invalid && eventForm.controls['minParticipants'].touched">
                 Min participants are required
             </small>
 
-            <label>Max Team Size<span>*</span></label>
+            <label>Max Team Size</label>
             <input type="number" formControlName="maxParticipants" placeholder="Maximum team size" />
+
+            <label>Host's Email<span>*</span></label>
+            <input type="email" formControlName="creatorEmail" placeholder="Enter valid email ID" />
+            <small *ngIf="eventForm.controls['creatorEmail'].invalid && eventForm.controls['creatorEmail'].touched">
+                Valid email id required
+            </small>
 
             <label>Meet Link(If event is Online)</label>
             <input type="text" formControlName="meetUrl" placeholder="Enter the link created" />
@@ -112,7 +124,7 @@
         <div class="nav-buttons">
             <button type="button" *ngIf="step > 1" (click)="prevStep()">Previous</button>
             <button type="button" *ngIf="step < 4" (click)="nextStep()">Next</button>
-            <button type="submit" *ngIf="step === 4" [disabled]="eventForm.invalid">Submit</button>
+            <button type="submit" *ngIf="step === 4">Submit</button>
         </div>
     </form>
 
@@ -125,12 +137,12 @@
         <input type="datetime-local" id="start_time" formControlName="start_time" />
 
         <label for="duration">Duration</label>
-        <input id="duration" type="number" formControlName="duration" placeholder="Meet Duration (minutes)"/>
+        <input id="duration" type="number" formControlName="duration" placeholder="Meet Duration (minutes)" />
 
         <label for="agenda">Agenda</label>
         <textarea id="agenda" formControlName="agenda" placeholder="Purpose/description"></textarea>
 
-        <button type="submit" >Schedule Meeting</button>
+        <button type="submit">Schedule Meeting</button>
         <div *ngIf="meetingDetails">
             <p>Meeting ID: {{ meetingDetails.meeting_id }}</p>
             <p>Join URL: <a [href]="meetingDetails.join_url" target="_blank">{{ meetingDetails.join_url }}</a></p>

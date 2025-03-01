@@ -1,7 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MainComponent } from './main/main.component';
+import { ViewAllComponent } from './view-all/view-all.component';
+import { ViewEventComponent } from './view-event/view-event.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', component: MainComponent, data: { roles: ['ROLE_ORGANIZATION'] },
+    children: [
+      {path:'', component: ViewAllComponent},
+      {path:'view-all', component: ViewAllComponent},
+      {path:'view-event/:id', component: ViewEventComponent},
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

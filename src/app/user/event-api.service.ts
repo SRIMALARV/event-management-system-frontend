@@ -16,6 +16,10 @@ export class EventApiService {
     return this.http.get<Event[]>(`${this.API_BASE_URL}/api/events`);
   }
 
+  getAllApprovedEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.API_BASE_URL}/api/events/approved`);
+  }
+
   getEventById(eventId: string): Observable<Event> {
     return this.http.get<Event>(`${this.API_BASE_URL}/api/events/${eventId}`);
   }

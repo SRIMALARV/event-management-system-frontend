@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HostApiService } from '../host-api.service';
 import { Event } from '../../model/event.model';
 import { ZoomService } from '../zoom.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-event',
@@ -15,14 +16,14 @@ import { ZoomService } from '../zoom.service';
   styleUrl: './create-event.component.css'
 })
 export class CreateEventComponent {
- username: string | null = null;
+  username: string | null = null;
   eventForm!: FormGroup;
   meetingForm: FormGroup;
   meetingDetails: any = null;
   step = 1;
 
-  institutes: string[] =[];
-  
+  institutes: string[] = [];
+
   constructor(private authService: AuthService, private router: Router,
     private fb: FormBuilder, private hostApi: HostApiService,
     private zoomService: ZoomService) {
@@ -42,7 +43,7 @@ export class CreateEventComponent {
       description: ['', [Validators.required, Validators.minLength(50)]],
       eventDate: ['', Validators.required],
       eventTime: ['', Validators.required],
-      eventDuration: ['', Validators.required, Validators.min(10)],
+      eventDuration: ['', [Validators.required, Validators.min(10)]],
       registrationDeadline: ['', Validators.required],
       eventMode: ['', Validators.required],
       contactDetails: ['', Validators.required],
@@ -53,6 +54,7 @@ export class CreateEventComponent {
       instituteName: ['', Validators.required],
       meetUrl: [''],
       meetId: [''],
+      creatorEmail: ['', [Validators.email, Validators.required]],
       meetPasscode: ['']
     });
     this.loadInstitutes();
@@ -82,17 +84,32 @@ export class CreateEventComponent {
   }
 
   submitForm() {
+    if (this.eventForm.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Form',
+        text: 'Please fill all required details correctly!',
+      });
+      return;
+    }
     const eventData: Event[] = {
       ...this.eventForm.value,
-      createdBy: this.username 
+      createdBy: this.username
     };
 
     this.hostApi.submitEvent(eventData).subscribe(response => {
-      console.log('Event submitted successfully', response);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Event submitted successfully!',
+      }).then(() => {
+        window.location.reload();
+      });
     }, error => {
       console.error('Error submitting event:', error);
     });
   }
+
   scheduleMeeting() {
     if (this.meetingForm.valid) {
       const formData = this.meetingForm.value;

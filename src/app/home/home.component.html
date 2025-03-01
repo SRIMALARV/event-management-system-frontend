@@ -9,12 +9,15 @@
         <li (click)="navigateTo('user/host')">Host</li>
     </ul>
     <div *ngIf="username; else showSignup" class="user-info">
-        <div class="user-profile">
+        <div class="user-profile" *ngIf="role !== 'ROLE_ORGANIZATION'">
             <img src="profile.png" class="user-profile">
             <span>{{ username }}</span>
         </div>
         <div *ngIf="role === 'ROLE_ADMIN'">
             <li routerLink="admin">Dashboard</li>
+        </div>
+        <div *ngIf="role === 'ROLE_ORGANIZATION'">
+            <li routerLink="org">Organization</li>
         </div>
         <button class="logout-btn" (click)="logout()">Logout</button>
     </div>

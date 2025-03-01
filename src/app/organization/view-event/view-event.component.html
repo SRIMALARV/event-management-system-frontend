@@ -1,0 +1,41 @@
+<div class="event-details-card">
+    <div class="event-details-title">
+        <h2>{{ event.title }}</h2>
+    </div>
+
+    <h3>Hosted by: {{event.createdBy}} - {{event.creatorEmail}} </h3>
+
+    <div class="event-info">
+        <p><i class="fas fa-building"></i> <strong>Organization:</strong> {{ event.instituteName }}</p>
+        <p><i class="fas fa-tag"></i> <strong>Event Type:</strong> {{ event.type }}</p>
+    </div>
+
+    <div class="event-datetime">
+        <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> {{ event.eventDate }}</p>
+        <p><i class="fas fa-exclamation-circle"></i> <strong>Deadline:</strong> {{
+            event.registrationDeadline }}</p>
+    </div>
+
+    <div class="event-duration">
+        <p><i class="fas fa-clock"></i> <strong>Time:</strong> {{ event.eventTime }}</p>
+        <p><i class="fas fa-hourglass-half"></i> <strong>Duration:</strong> {{ event.eventDuration }}
+            minutes</p>
+    </div>
+
+    <div class="event-location">
+        <p><i class="fas fa-globe"></i> <strong>Event Mode:</strong> {{ event.eventMode }}</p>
+        <p *ngIf="event.location"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{
+            event.location }}</p>
+    </div>
+
+    <p><i class="fas fa-users"></i> <strong>Team Size:</strong> {{ event.minParticipants }} - {{
+        event.maxParticipants }}</p>
+
+    <p *ngIf="event.fee"><i class="fas fa-money-bill-wave"></i> <strong>Registration Fee:</strong> {{
+        event.fee }}</p>
+
+        <p><i class="fas fa-info-circle"></i> <strong>About the Event:</strong></p>
+        <p>{{ event.description }}</p>
+
+        <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> {{ event.contactDetails }}</p>
+</div>
