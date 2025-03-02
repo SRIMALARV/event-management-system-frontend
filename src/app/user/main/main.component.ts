@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Va
 import { HostApiService } from '../host-api.service';
 import { Registration } from '../../model/regsitration.model';
 import { RegistrationApiService } from '../registration-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main',
@@ -28,7 +29,7 @@ export class MainComponent {
   selectedSort: string = 'Date';
   selectedEventId: string | null = null;
 
-  showRegistrationForm = false; 
+  showRegistrationForm = false;
   registrationForm!: FormGroup;
   institutes: string[] = [];
 
@@ -39,7 +40,7 @@ export class MainComponent {
     private hostApi: HostApiService,
     private fb: FormBuilder,
     private registrationService: RegistrationApiService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
@@ -191,27 +192,31 @@ export class MainComponent {
     if (this.registrationForm.invalid) {
       return;
     }
-  
+
     const registrationData: Registration = this.registrationForm.value;
-    registrationData.eventId = this.selectedEvent?.id; 
+    registrationData.eventId = this.selectedEvent?.id;
     registrationData.username = localStorage.getItem('username') ?? '';
-    
+
     registrationData.teammates = this.teammates.value.map((teammate: { name: string }) => teammate.name);
     console.log("data:", registrationData);
-  
+
     this.registrationService.saveRegistration(registrationData).subscribe({
       next: (response) => {
-        alert('Registration successful!');
+        Swal.fire({
+          icon: 'success', title: 'Registration Successful!',
+          text: 'You have successfully registered for the event.', confirmButtonText: 'OK'
+        });
         this.showRegistrationForm = false;
         this.registrationForm.reset();
       },
-      error: (error) => {
-        console.error('Registration failed:', error);
-        alert('Registration failed. Please try again.');
+      error: () => {
+        Swal.fire({
+          icon: 'error', title: 'Registration Failed!',
+          text: 'Something went wrong. Please try again.', confirmButtonText: 'OK'
+        });
       }
     });
   }
-  
 
   logout() {
     this.authService.logout();

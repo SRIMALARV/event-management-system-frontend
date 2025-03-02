@@ -16,9 +16,9 @@ export class OrgApiService {
     return this.http.get<Event[]>(`${this.API_BASE_URL}/api/organization/${organization}`);
   }
 
-  updateEventStatus(eventId: string, status: string): Observable<any> {
-    return this.http.put(`${this.API_BASE_URL}/api/organization/${eventId}/${status}`, {});
-  }
+  updateEventStatus(eventId: string, status: string, reason: string): Observable<any> {
+    return this.http.put(`${this.API_BASE_URL}/api/organization/${eventId}/${status}`, { reason });
+  }  
 
   getEventById(eventId: string): Observable<Event> {
     return this.http.get<Event>(`${this.API_BASE_URL}/api/events/${eventId}`);
