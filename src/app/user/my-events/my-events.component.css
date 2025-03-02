@@ -1,7 +1,8 @@
 .container {
     max-width: 900px;
-    margin: 100px;
+    margin-top: 100px;
     text-align: center;
+    justify-content: center;
 }
 
 .loading,
@@ -33,6 +34,7 @@
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     text-align: left;
+    color: #383838;
 }
 
 .event-card h3 {
@@ -50,4 +52,15 @@
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
+}
+.approved {
+    color: green;
+}
+
+.rejected {
+    color: red;
+}
+
+.pending {
+    color: blue;
 }

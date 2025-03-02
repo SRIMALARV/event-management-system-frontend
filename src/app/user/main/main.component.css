@@ -227,7 +227,7 @@ input {
 
 /**************************** EVENT BY ID *******************/
 
-.event-details {
+.event-details, .registration-container {
     width: 65%;
     padding: 20px;
     border-left: 1px solid #ddd;
@@ -298,4 +298,87 @@ p {
 i {
     color: #5a3e81;
     font-size: 16px;
+}
+
+.register-button {
+    padding: 10px 20px;
+    background: #472465;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 200px;
+}
+
+.register-button:hover {
+    background-color: #6e46a5;
+}
+
+
+/************************************ REG  FORM ******************/
+
+
+.register-form span {
+    color: red;
+}
+
+small {
+    color: red;
+    font-size: 12px;
+    display: block;
+}
+
+.register-form {
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.register-form label {
+    display: block;
+    margin-top: 10px;
+    color: #535353;
+}
+
+.register-form input,
+.register-form select {
+    width: 90%;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 0;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+    border: 1px solid #6c1fa7;
+}
+
+button[type="submit"]:disabled {
+    background: #b59cc9;
+    cursor: not-allowed;
+}
+
+.register-form .register-button {
+    margin-left: 10px;
+}
+
+.cancel-button {
+    padding: 10px 20px;
+    background: rgb(181, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 480px;
+}
+
+.cancel-button:hover {
+    background-color: rgb(161, 74, 74);
 }
