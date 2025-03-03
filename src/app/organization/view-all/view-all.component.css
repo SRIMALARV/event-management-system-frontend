@@ -53,3 +53,31 @@ h2 {
 .pending {
     color: blue;
 }
+
+button {
+    background-color: white;
+    border: 1.5px solid rgb(78, 15, 154);
+    color: rgb(88, 43, 142);
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.view-btn:hover {
+    background-color: rgb(221, 193, 255);
+    border: 1.5px solid rgb(78, 15, 154);
+    color: rgb(88, 43, 142);
+}
+
+.approve-btn:hover {
+    background-color: rgb(193, 255, 198);
+    border: 1.5px solid rgb(10, 126, 31);
+    color: rgb(10, 126, 31);
+}
+
+.reject-btn:hover {
+    background-color: rgb(255, 193, 193);
+    border: 1.5px solid rgb(150, 11, 11);
+    color:  rgb(150, 11, 11);
+}

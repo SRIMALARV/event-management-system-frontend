@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrgApiService } from '../org-api.service';
 import { Event } from '../../model/event.model';
 import { CommonModule } from '@angular/common';
+import { RegistrationApiService } from '../../user/registration-api.service';
 
 @Component({
   selector: 'app-view-event',
@@ -15,7 +16,9 @@ export class ViewEventComponent {
   event!: Event;
   eventId: string = '';
 
-  constructor(private route: ActivatedRoute, private eventService: OrgApiService) {}
+  constructor(private route: ActivatedRoute, private eventService: OrgApiService,
+    private registrationApi: RegistrationApiService
+  ) {}
 
   ngOnInit(): void {
     this.eventId = this.route.snapshot.paramMap.get('id') || '';
@@ -29,7 +32,11 @@ export class ViewEventComponent {
     this.eventService.getEventById(this.eventId).subscribe(
       (data) => {
         this.event = data;
-        console.log(this.event);
+        this.registrationApi.getRegistrationsByEvent(this.eventId ?? '').subscribe({
+          next: (registrations) => {
+            this.event.registeredCount = registrations.length;
+          }
+        });
       },
       (error) => {
         console.error('Error fetching event:', error);

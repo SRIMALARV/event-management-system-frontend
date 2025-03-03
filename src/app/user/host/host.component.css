@@ -1,11 +1,12 @@
 body {
     background-color: white;
     font-family: Arial, sans-serif;
+
 }
 
 .host-content {
-    background-color: #f6f2f8;
-    min-height:500px;
+    margin-top: 0;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(243, 201, 255, 0.048231792717086885) 61%, rgba(202, 141, 255, 0.13506652661064422) 89%);
 }
 
 .navbar {
@@ -85,4 +86,36 @@ li:hover {
     gap: 5px;
     align-items: center;
     justify-content: center;
+}
+
+.host-web-content {
+    display: flex;
+    margin-top: 100px;
+    height: 150px;
+    color: #535353;
+    background: rgb(121, 5, 223);
+    background: linear-gradient(90deg, rgba(121, 5, 223, 0.12666316526610644) 0%, rgba(237, 211, 255, 0.21349789915966388) 44%, rgba(121, 5, 223, 0.11545868347338939) 100%);
+}
+
+.host-img {
+    margin: 0 50px;
+    height: 150px;
+}
+
+.host-lines {
+    margin-left: 200px;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.host-lines h1 {
+    margin-bottom: 10px;
+}
+
+.host-lines p {
+    color: #767676;
+}
+
+.host-web-content span {
+    color: rgb(91, 22, 155);
 }

@@ -119,6 +119,6 @@ export class HostComponent {
 
   logout() {
     this.authService.logout();
-    window.location.reload();
+    this.router.navigate(['']);
   }
 }

@@ -366,6 +366,7 @@ button[type="submit"]:disabled {
 }
 
 .register-form .register-button {
+    margin-top: 10px;
     margin-left: 10px;
 }
 
@@ -377,6 +378,7 @@ button[type="submit"]:disabled {
     border-radius: 20px;
     cursor: pointer;
     margin-left: 480px;
+    margin-top: 10px;
 }
 
 .cancel-button:hover {

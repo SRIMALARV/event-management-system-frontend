@@ -2,8 +2,10 @@
     <div class="event-details-title">
         <h2>{{ event.title }}</h2>
     </div>
-
-    <h3>Hosted by: {{event.createdBy}} - {{event.creatorEmail}} </h3>
+    <div class="main-details">
+        <h3>Hosted by: {{event.createdBy}} - {{event.creatorEmail}} </h3>
+        <h3 *ngIf="event.status === 'approved'"><i class="fa fa-users"></i> Registered: {{event.registeredCount}}</h3>
+    </div>
 
     <div class="event-info">
         <p><i class="fas fa-building"></i> <strong>Organization:</strong> {{ event.instituteName }}</p>
@@ -34,8 +36,8 @@
     <p *ngIf="event.fee"><i class="fas fa-money-bill-wave"></i> <strong>Registration Fee:</strong> {{
         event.fee }}</p>
 
-        <p><i class="fas fa-info-circle"></i> <strong>About the Event:</strong></p>
-        <p>{{ event.description }}</p>
+    <p><i class="fas fa-info-circle"></i> <strong>About the Event:</strong></p>
+    <p>{{ event.description }}</p>
 
-        <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> {{ event.contactDetails }}</p>
+    <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> {{ event.contactDetails }}</p>
 </div>

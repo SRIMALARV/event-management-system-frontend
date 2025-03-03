@@ -19,9 +19,9 @@
                     {{ event.status }}
                 </td>
                 <td>
-                    <button class="btn btn-info btn-sm" [routerLink]="['view-event', event.id]">View</button>
-                    <button class="btn btn-success btn-sm" (click)="event.id && updateStatus(event.id, 'approved')">Approve</button>
-                    <button class="btn btn-danger btn-sm" (click)="event.id && updateStatus(event.id, 'rejected')">Reject</button>
+                    <button class="view-btn" [routerLink]="['view-event', event.id]">View</button>
+                    <button class="approve-btn" (click)="event.id && updateStatus(event.id, 'approved')">Approve</button>
+                    <button class="reject-btn" (click)="event.id && updateStatus(event.id, 'rejected')">Reject</button>
                 </td>
             </tr>
         </tbody>

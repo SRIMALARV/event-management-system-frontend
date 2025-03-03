@@ -4,9 +4,9 @@
         <h1>Event Hub</h1>
     </div>
     <ul>
-            <li routerLink="/user">Events</li>
-            <li routerLink="my-events">My events</li>
-            <li routerLink="create-event">Create event</li>
+        <li routerLink="/user">Events</li>
+        <li routerLink="my-events">My events</li>
+        <li routerLink="create-event">Create event</li>
     </ul>
     <div class="user-profile">
         <img src="profile.png" class="user-profile">
@@ -14,6 +14,13 @@
     </div>
     <button class="logout-btn" (click)="logout()">Logout</button>
 </nav>
+<div class="host-web-content">
+    <img src="host.png" class="host-img">
+    <div class="host-lines">
+        <h1>Host an <span>Opportunity</span></h1>
+        <p>Present your <span>innovative</span> ideas with challenging situations<br>Host memorable events & elevate your event <span>experience!</span></p>
+    </div>
+</div>
 <div class="host-content">
     <router-outlet></router-outlet>
 </div>

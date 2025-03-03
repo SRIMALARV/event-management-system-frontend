@@ -7,9 +7,9 @@ import { ViewEventComponent } from './view-event/view-event.component';
 const routes: Routes = [
   {path: '', component: MainComponent, data: { roles: ['ROLE_ORGANIZATION'] },
     children: [
-      {path:'', component: ViewAllComponent},
+      { path: '', redirectTo: 'view-all', pathMatch: 'full' },
       {path:'view-all', component: ViewAllComponent},
-      {path:'view-event/:id', component: ViewEventComponent},
+      {path:'view-all/view-event/:id', component: ViewEventComponent},
     ]
   }
 ];

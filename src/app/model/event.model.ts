@@ -20,4 +20,5 @@ export interface Event {
   creatorEmail: string;
   createdBy?: string;
   status?: string;
+  registeredCount?: number;
 }

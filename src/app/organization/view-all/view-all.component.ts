@@ -49,7 +49,6 @@ export class ViewAllComponent {
       this.sendStatusUpdate(eventId, status, '');
     }
   }
-  
   sendStatusUpdate(eventId: string, status: string, reason: string): void {
     this.eventService.updateEventStatus(eventId, status, reason).subscribe(() => {
       this.fetchEvents();

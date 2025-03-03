@@ -37,6 +37,7 @@ body {
     align-items: center;
     justify-self: center;
     gap: 2px;
+    cursor: pointer;
 }
 
 .navbar h1 {

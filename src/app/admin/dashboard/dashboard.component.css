@@ -1,12 +1,13 @@
-
-.layout, .content {
+.layout,
+.content {
     margin: 0;
     padding: 0;
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
 .main-content {
-    background-color: #f8f4f9;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(243, 201, 255, 0.048231792717086885) 61%, rgba(202, 141, 255, 0.13506652661064422) 89%);
     flex-grow: 1;
 }

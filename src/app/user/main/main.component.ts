@@ -65,6 +65,8 @@ export class MainComponent {
     this.eventApiService.getAllApprovedEvents().subscribe({
       next: (data) => {
         this.events = data;
+        const currentDate = new Date();
+        this.events = data.filter(event => new Date(event.registrationDeadline) >= currentDate);
         this.filteredEvents = [...this.events];
       },
       error: (error) => {

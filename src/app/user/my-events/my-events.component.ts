@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HostApiService } from '../host-api.service';
 import { Event } from '../../model/event.model';
 import { CommonModule } from '@angular/common';
+import { RegistrationApiService } from '../registration-api.service';
 
 @Component({
   selector: 'app-my-events',
@@ -14,23 +15,27 @@ export class MyEventsComponent {
   myEvents: Event[] = [];
   username: string | null = null;
   isLoading = true;
-  errorMessage: string | null = null;
 
-  constructor(private hostApi: HostApiService) {}
+  constructor(private hostApi: HostApiService, private registrationApi: RegistrationApiService) {}
 
   ngOnInit(): void {
-    this.username = localStorage.getItem('username');
-    if (this.username) {
+    this.username = localStorage.getItem('username'); 
       this.loadUserEvents();
-    } else {
-      this.errorMessage = "User not logged in.";
-    }
   }
 
   loadUserEvents(): void {
     this.hostApi.getUserEvents().subscribe({
       next: (events) => {
         this.myEvents = events;
+
+        this.myEvents.forEach(event => {
+          this.registrationApi.getRegistrationsByEvent(event.id ?? '').subscribe({
+            next: (registrations) => {
+              event.registeredCount = registrations.length;
+            }
+          });
+        });        
+        
         this.isLoading = false;
       },
       error: (error) => {

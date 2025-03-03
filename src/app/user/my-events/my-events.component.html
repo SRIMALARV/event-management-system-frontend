@@ -1,9 +1,4 @@
 <div class="container">
-  <h2>My Events</h2>
-
-  <div *ngIf="isLoading" class="loading">Loading events...</div>
-  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-
   <div class="event-list" *ngIf="myEvents.length > 0">
     <div class="event-card" *ngFor="let event of myEvents">
       <h3>{{ event.title }}</h3>
@@ -22,6 +17,8 @@
       <div *ngIf="event.meetUrl">
         <a [href]="event.meetUrl">Join Meeting</a>
       </div>
+
+      <p><i class="fa fa-users"></i>Registered: {{ event.registeredCount}}</p>
     </div>
   </div>
 
