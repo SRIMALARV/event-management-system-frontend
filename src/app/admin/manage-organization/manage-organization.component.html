@@ -1,1 +1,31 @@
-<p>manage-organization works!</p>
+<div class="table-container">
+    <h2>Manage Organizations</h2>
+    <input type="text" placeholder="Search by name or email..." (keyup)="filterOrganizations($event)"/>
+    <table>
+      <thead>
+        <tr>
+          <th>Institute Name</th>
+          <th>Email</th>
+          <th>Change Password</th>
+          <th>View</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let org of filteredOrganizations">
+          <td>{{ org.name }}</td>
+          <td>{{ org.email }}</td>
+          <td class="btn">
+            <button class="btn change-btn" (click)="changePassword(org)">Change</button>
+          </td>
+          <td class="btn">
+            <button class="btn view-btn" (click)="viewInstitute(org)">View</button>
+          </td>
+          <td class="btn">
+            <button class="btn delete-btn" (click)="deleteInstitute(org)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

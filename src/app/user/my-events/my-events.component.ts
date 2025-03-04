@@ -3,11 +3,12 @@ import { HostApiService } from '../host-api.service';
 import { Event } from '../../model/event.model';
 import { CommonModule } from '@angular/common';
 import { RegistrationApiService } from '../registration-api.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-my-events',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './my-events.component.html',
   styleUrl: './my-events.component.css'
 })
@@ -35,7 +36,7 @@ export class MyEventsComponent {
             }
           });
         });        
-        
+
         this.isLoading = false;
       },
       error: (error) => {

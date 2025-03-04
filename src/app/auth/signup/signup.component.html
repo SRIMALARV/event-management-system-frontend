@@ -4,22 +4,41 @@
         <p>Please login with your personal info to continue!</p>
         <button class="sign-in-btn" routerLink="/auth/login">Log In</button>
     </div>
+    
     <div class="right-section">
         <h2>Create Account</h2>
-        <form (submit)="onSignup()">
+        <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+            
             <div class="input-group">
                 <i class="fa fa-user"></i>
-                <input type="text" placeholder="Name" [(ngModel)]="username" name="username" required>
+                <input type="text" placeholder="Name" formControlName="username">
             </div>
+            <div class="error" *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+                <small *ngIf="signupForm.get('username')?.errors?.['required']">Name is required</small>
+                <small *ngIf="signupForm.get('username')?.errors?.['minlength']">Name must be at least 2 characters</small>
+                <small *ngIf="signupForm.get('username')?.errors?.['maxlength']">Name cannot exceed 50 characters</small>
+            </div>
+
             <div class="input-group">
                 <i class="fa fa-envelope"></i>
-                <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
+                <input type="email" placeholder="Email" formControlName="email">
             </div>
+            <div class="error" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</small>
+                <small *ngIf="signupForm.get('email')?.errors?.['email']">Enter a valid email</small>
+            </div>
+
             <div class="input-group">
                 <i class="fa fa-lock"></i>
-                <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+                <input type="password" placeholder="Password" formControlName="password">
             </div>
-            <button type="submit" class="sign-up-btn">Sign Up</button>
+            <div class="error" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</small>
+                <small *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</small>
+                <small *ngIf="signupForm.get('password')?.errors?.['pattern']">Password must contain at least one letter and one number</small>
+            </div>
+
+            <button type="submit" class="sign-up-btn" [disabled]="signupForm.invalid">Sign Up</button>
         </form>
     </div>
 </div>

@@ -25,7 +25,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-height: 500px
+    max-height: 600px;
 }
 
 .meet-details {
@@ -38,6 +38,14 @@
 
 .meet-details input {
     width: 50%;
+}
+
+.meet-link {
+    margin: 20px 5px;
+}
+
+.meet-link p {
+    margin-bottom: 5px;
 }
 
 h2 {

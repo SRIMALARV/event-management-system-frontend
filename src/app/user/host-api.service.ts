@@ -23,6 +23,9 @@ export class HostApiService {
   getUserEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.API_BASE_URL}/api/events/my-events`);
   }
-  
 
+  updateEvent(eventId: string, eventData: Partial<Event>) {
+    return this.http.patch<Event>(`/api/events/${eventId}`, eventData, { responseType: 'json' });
+  }
+  
 }

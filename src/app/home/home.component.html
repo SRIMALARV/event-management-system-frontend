@@ -8,6 +8,7 @@
         <li>Home</li>
         <li (click)="navigateTo('user')">Events</li>
         <li (click)="navigateTo('user/host')">Host</li>
+        <li (click)="scrollToFooter()">Feedback</li>
     </ul>
     <div *ngIf="username; else showSignup" class="user-info">
         <div class="user-profile" *ngIf="role !== 'ROLE_ORGANIZATION'">
@@ -56,17 +57,25 @@
     </div>
     <button class="scroll-btn right" (click)="scrollRight()">&#10095;</button>
 </div>
-<footer class="footer">
+<footer class="footer" #footerSection>
     <div class="feedback-section">
         <h3>FEEDBACK</h3>
-        <h4>We'd love your feedback!</h4>
+        <p>We'd love your feedback!</p>
         <textarea placeholder="Write your feedback here..." [(ngModel)]="feedbackText"></textarea>
         <button (click)="submitFeedback()">Submit</button>
     </div>
 
+    <div class="contact">
+        <h3>CONTACT</h3>
+        <p>hubevent54&#64;gmail.com</p>
+        <p>+91 662 767 1100</p>
+        <p>Coimbatore, India</p>
+        <p>641062</p>
+    </div>
+
     <div class="social-media">
         <h3>CONTACT</h3>
-        <p>hubevent&#64;gmail.com</p>
+        <p>hubevent54&#64;gmail.com</p>
         <p>+91 662 767 1100</p>
         <p>Coimbatore, India</p>
         <p>641062</p>

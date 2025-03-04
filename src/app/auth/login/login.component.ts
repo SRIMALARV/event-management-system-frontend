@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
-import {FormsModule} from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -16,11 +16,22 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
+  loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   onLogin(): void {
-    this.authService.login(this.username, this.password).subscribe(
+    if (this.loginForm.invalid) {
+      return;
+    }
+    const { username, password } = this.loginForm.value;
+
+    this.authService.login(username, password).subscribe(
       (response) => {
         console.log('Login Success:', response);
         this.authService.setToken(response.token);
@@ -36,10 +47,10 @@ export class LoginComponent {
           }
         }).fire({
           icon: 'success',
-          title: `Welcome, ${this.username}!`
+          title: `Welcome, ${username}!`
         });
         this.redirectUser(response.roles[0]);
-      }, 
+      },
       (error) => {
         console.error('Login Failed:', error);
         this.errorMessage = "Invalid username or password!";

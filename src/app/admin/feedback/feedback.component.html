@@ -1,1 +1,7 @@
-<p>feedback works!</p>
+<div class="feedback-container">
+    <div *ngFor="let feedback of feedbacks" class="feedback-card">
+        <img src="profile.png">
+      <h3 class="feedback-user">{{ feedback.username }}</h3>
+      <p class="feedback-content">{{ feedback.feedback }} </p>
+    </div>
+</div>

@@ -24,6 +24,14 @@ h2 {
     border: 1px solid #dee2e6;
 }
 
+.table-head th:first-child,
+.table-head th:last-child,
+tbody td:first-child,
+tbody td:last-child {
+    width: 250px; 
+}
+
+
 .table-head {
     background-color: #343a40;
     color: white;

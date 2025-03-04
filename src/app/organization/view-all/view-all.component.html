@@ -18,7 +18,7 @@
                 <td [ngClass]="{'approved': event.status === 'approved', 'rejected': event.status === 'rejected',  'pending': event.status === 'pending' }">
                     {{ event.status }}
                 </td>
-                <td>
+                <td class="action-btns">
                     <button class="view-btn" [routerLink]="['view-event', event.id]">View</button>
                     <button class="approve-btn" (click)="event.id && updateStatus(event.id, 'approved')">Approve</button>
                     <button class="reject-btn" (click)="event.id && updateStatus(event.id, 'rejected')">Reject</button>

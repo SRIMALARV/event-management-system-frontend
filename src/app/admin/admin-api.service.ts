@@ -3,7 +3,6 @@ import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Feedback } from '../model/feedback.model';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +18,10 @@ export class AdminApiService {
     sendFeedback(feedback: Feedback): Observable<Feedback> {
       return this.http.post<Feedback>(`${this.API_BASE_URL}/api/feedback`, feedback);
     }
-    
-    getFeedback(feedback: Feedback[]): Observable<Feedback[]> {
+
+    getFeedback(): Observable<Feedback[]> {
       return this.http.get<Feedback[]>(`${this.API_BASE_URL}/api/feedback`);
     }
+
+    
 }

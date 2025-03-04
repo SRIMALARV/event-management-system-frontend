@@ -155,7 +155,7 @@ export class MainComponent {
     this.showRegistrationForm = true;
 
     this.registrationForm = this.fb.group({
-      participantName: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       instituteName: ['', Validators.required],
       course: ['', Validators.required],

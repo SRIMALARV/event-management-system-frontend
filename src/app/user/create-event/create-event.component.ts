@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HostApiService } from '../host-api.service';
 import { Event } from '../../model/event.model';
 import { ZoomService } from '../zoom.service';
 import Swal from 'sweetalert2';
+import { EventApiService } from '../event-api.service';
 
 @Component({
   selector: 'app-create-event',
@@ -21,12 +22,13 @@ export class CreateEventComponent {
   meetingForm: FormGroup;
   meetingDetails: any = null;
   step = 1;
-
   institutes: string[] = [];
+  eventId: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router,
-    private fb: FormBuilder, private hostApi: HostApiService,
-    private zoomService: ZoomService) {
+  constructor(
+    private authService: AuthService, private router: Router, private route: ActivatedRoute,
+    private fb: FormBuilder, private hostApi: HostApiService, private zoomService: ZoomService,
+    private eventApi: EventApiService) {
     this.meetingForm = this.fb.group({
       topic: ['', Validators.required],
       start_time: ['', Validators.required],
@@ -37,6 +39,7 @@ export class CreateEventComponent {
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
+
     this.eventForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
       type: ['', Validators.required],
@@ -57,7 +60,15 @@ export class CreateEventComponent {
       creatorEmail: ['', [Validators.email, Validators.required]],
       meetPasscode: ['']
     });
+
     this.loadInstitutes();
+
+    this.route.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+      if (this.eventId) {
+        this.loadEventDetails(this.eventId);
+      }
+    });
   }
 
   loadInstitutes() {
@@ -66,9 +77,20 @@ export class CreateEventComponent {
         this.institutes = data;
       },
       error: (error) => {
-        console.error(error);
+        console.error('Error fetching institutes:', error);
       }
-    })
+    });
+  }
+
+  loadEventDetails(eventId: string) {
+    this.eventApi.getEventById(eventId).subscribe({
+      next: (eventData: Event) => {
+        this.eventForm.patchValue(eventData);
+      },
+      error: () => {
+        console.error('Error fetching event details');
+      }
+    });
   }
 
   nextStep() {
@@ -84,7 +106,18 @@ export class CreateEventComponent {
   }
 
   submitForm() {
-    if (this.eventForm.invalid) {
+    let eventData = { ...this.eventForm.value, createdBy: this.username };
+
+    if (this.eventId) {
+      const updatedData: any = {};
+      Object.keys(this.eventForm.controls).forEach((key) => {
+        if (this.eventForm.controls[key].dirty) {
+          updatedData[key] = this.eventForm.value[key];
+        }
+      });
+      eventData = { ...eventData, ...updatedData };
+    }
+    else if (this.eventForm.invalid) {
       Swal.fire({
         icon: 'error',
         title: 'Invalid Form',
@@ -92,39 +125,39 @@ export class CreateEventComponent {
       });
       return;
     }
-    const eventData: Event[] = {
-      ...this.eventForm.value,
-      createdBy: this.username
-    };
 
-    this.hostApi.submitEvent(eventData).subscribe(response => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: 'Event submitted successfully!',
-      }).then(() => {
-        window.location.reload();
-      });
-    }, error => {
-      console.error('Error submitting event:', error);
-    });
+    this.hostApi.submitEvent(eventData).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Event submitted successfully!',
+        }).then(() => {
+          this.router.navigate(['/host']);
+        });
+      },
+      (error) => {
+        console.error('Error submitting event:', error);
+      }
+    );
   }
+
 
   scheduleMeeting() {
     if (this.meetingForm.valid) {
       const formData = this.meetingForm.value;
-
       const startTime = new Date(formData.start_time);
       const formattedStartTime = startTime.toISOString();
 
       const meetingData = {
         ...formData,
-        start_time: formattedStartTime
+        start_time: formattedStartTime,
+        type: 2
       };
 
       this.zoomService.createMeeting(meetingData).subscribe(
         (response) => {
-          console.log('Meeting is created:', response);
+          console.log('Meeting created:', response);
           this.meetingDetails = response;
         },
         (error) => {
@@ -139,3 +172,4 @@ export class CreateEventComponent {
     window.location.reload();
   }
 }
+

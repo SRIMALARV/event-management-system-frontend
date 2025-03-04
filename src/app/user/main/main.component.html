@@ -105,8 +105,8 @@
                 <h2>{{ selectedEvent?.title }}</h2>
             </div>
             <label>Name<span>*</span></label>
-            <input type="text" formControlName="participantName" placeholder="Participant name with initial">
-            <small *ngIf="registrationForm.controls['participantName'].invalid && registrationForm.controls['participantName'].touched">
+            <input type="text" formControlName="name" placeholder="Participant name with initial">
+            <small *ngIf="registrationForm.controls['name'].invalid && registrationForm.controls['name'].touched">
                 Participant name is required
             </small>
 

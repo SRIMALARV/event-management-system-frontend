@@ -27,7 +27,7 @@
     padding: 25px;
     background: #fff;
     border-radius: 10px;
-    margin-top: 40px;
+    margin: 40px auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     text-align: left;
     justify-content: center;
@@ -57,14 +57,31 @@
 }
 
 .rejected {
-    color: red;
+    color: rgb(212, 0, 0);
 }
 
 .pending {
-    color: blue;
+    color: rgb(34, 34, 168);
 }
 
-i {
+.registered {
     color: #5a3e81;
-    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.edit-btn {
+    background-color: white;
+    border: 1.5px solid rgb(78, 15, 154);
+    color: rgb(88, 43, 142);
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-right: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: rgb(221, 193, 255);
+    border: 1.5px solid rgb(78, 15, 154);
+    color: rgb(88, 43, 142);
 }

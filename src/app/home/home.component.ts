@@ -25,6 +25,7 @@ export class HomeComponent {
     this.role = localStorage.getItem('role');
   }
   @ViewChild('scrollContainer', { static: false }) scrollContainer!: ElementRef;
+  @ViewChild('footerSection', { static: false }) footer!: ElementRef;
 
   eventList = [
     { name: 'Competitions', img: 'competition.png' },
@@ -40,6 +41,10 @@ export class HomeComponent {
 
   scrollRight() {
     this.scrollContainer.nativeElement.scrollBy({ left: 250, behavior: 'smooth' });
+  }
+
+  scrollToFooter() {
+    this.footer.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
 
   moveToLogin() {
