@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ManageOrgApiService } from '../manage-org-api.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-manage-organization',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './manage-organization.component.html',
   styleUrl: './manage-organization.component.css'
 })
@@ -56,10 +57,6 @@ export class ManageOrganizationComponent {
             }
           });
   } 
-
-  viewInstitute(institute: any) {
-    
-  }
 
   deleteInstitute(institute: any) {
     Swal.fire({

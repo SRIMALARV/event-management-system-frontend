@@ -19,7 +19,7 @@
             <button class="btn change-btn" (click)="changePassword(org)">Change</button>
           </td>
           <td class="btn">
-            <button class="btn view-btn" (click)="viewInstitute(org)">View</button>
+            <button class="btn view-btn" [routerLink]="['view-events', org.name]">View</button>
           </td>
           <td class="btn">
             <button class="btn delete-btn" (click)="deleteInstitute(org)">Delete</button>

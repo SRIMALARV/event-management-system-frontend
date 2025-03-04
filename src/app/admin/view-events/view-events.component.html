@@ -1,0 +1,24 @@
+<div class="table-container">
+    <h2>Organization Events</h2>
+    <input type="text" placeholder="Search by name or email..." (keyup)="filterEvents($event)"/>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let event of filteredEvents">
+                <td>{{ event.title }}</td>
+                <td>{{ event.type }}</td>
+                <td>{{ event.eventDate }}</td>
+                <td [ngClass]="{'approved': event.status === 'approved', 'rejected': event.status === 'rejected',  'pending': event.status === 'pending' }">
+                    {{ event.status }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

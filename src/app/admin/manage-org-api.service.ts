@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Event } from '../model/event.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,9 @@ export class ManageOrgApiService {
   deleteOrganization(username: string): Observable<any> {
     return this.http.delete(`${this.API_BASE_URL}/api/users/delete/${username}`);
   }
+
+  getEventsByOrganization(organization: string): Observable<Event[]> {
+      return this.http.get<Event[]>(`${this.API_BASE_URL}/api/organization/${organization}`);
+    }
 
 }

@@ -21,7 +21,5 @@ export class AdminApiService {
 
     getFeedback(): Observable<Feedback[]> {
       return this.http.get<Feedback[]>(`${this.API_BASE_URL}/api/feedback`);
-    }
-
-    
+    }   
 }
