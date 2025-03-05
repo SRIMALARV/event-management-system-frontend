@@ -9,6 +9,8 @@ import { HostApiService } from '../host-api.service';
 import { Registration } from '../../model/regsitration.model';
 import { RegistrationApiService } from '../registration-api.service';
 import Swal from 'sweetalert2';
+import moment from 'moment';
+
 
 @Component({
   selector: 'app-main',
@@ -133,6 +135,7 @@ export class MainComponent {
     this.eventApiService.getEventById(eventId).subscribe({
       next: (data) => {
         this.selectedEvent = data;
+        this.selectedEvent.eventTime = moment(this.selectedEvent.eventTime, 'HH:mm').format('hh:mm A');
       },
       error: (error) => {
         console.error("Error fetching event details", error);
