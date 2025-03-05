@@ -2,25 +2,52 @@
     max-width: 900px;
     margin: auto;
     padding: 20px;
+    margin-left: 10px;
 }
 
 h2 {
-    text-align: center;
     color: #5a3e81 ;
     margin-bottom: 5px;
     font-weight: normal;
+}
+
+input {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #4c1794;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 300px;
+}
+
+.data {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 110%;
+    margin-bottom: 10px;
 
 }
 
+.export-data{
+    padding: 0.5rem 1rem;
+    color: white;
+    border-radius: 0;
+    background-color: #441b7d;
+}
+
+.export-data:hover {
+    background-color: #673ca4;
+}
+
 .table {
-    width: 100%;
+    width: 110%;
     border-collapse: collapse;
 }
 
 .table th, .table td {
     padding: 12px;
     text-align: center;
-    border: 1px solid #dee2e6;
     font-weight: normal;
 }
 

@@ -18,7 +18,7 @@
         <a [href]="event.meetUrl">Join Meeting</a>
       </div>
 
-      <p *ngIf="event.status === 'approved'" class="registered"><i class="fa fa-users"></i> Registered: {{ event.registeredCount}}</p>
+      <p *ngIf="event.status === 'approved'" class="registered" (click)="exportRegistrationData(event.id ?? '', event.title)" title="Export Data"><i class="fa fa-users"></i> Registered: {{ event.registeredCount}}</p>
       <button *ngIf="event.status === 'rejected'" class="edit-btn" [routerLink]="['edit-event', event.id]">Edit Event</button>
     </div>
   </div>

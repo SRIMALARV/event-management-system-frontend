@@ -8,6 +8,8 @@ import { Event } from '../../model/event.model';
 import { ZoomService } from '../zoom.service';
 import Swal from 'sweetalert2';
 import { EventApiService } from '../event-api.service';
+import * as moment from 'moment-timezone';
+
 
 @Component({
   selector: 'app-create-event',
@@ -143,15 +145,18 @@ export class CreateEventComponent {
   }
 
 
+
   scheduleMeeting() {
     if (this.meetingForm.valid) {
       const formData = this.meetingForm.value;
-      const startTime = new Date(formData.start_time);
-      const formattedStartTime = startTime.toISOString();
+
+      const userTimeZone = moment.tz.guess(); 
+      const startTime = moment.tz(formData.start_time, userTimeZone).utc().format();
 
       const meetingData = {
         ...formData,
-        start_time: formattedStartTime,
+        start_time: startTime, 
+        timezone: userTimeZone, 
         type: 2
       };
 
@@ -167,9 +172,9 @@ export class CreateEventComponent {
     }
   }
 
-  logout() {
-    this.authService.logout();
-    window.location.reload();
-  }
+    logout() {
+      this.authService.logout();
+      window.location.reload();
+    }
 }
 

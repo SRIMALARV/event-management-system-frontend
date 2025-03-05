@@ -1,5 +1,9 @@
 <div class="container">
     <h2>Organization Events</h2>
+    <div class="data">
+    <input type="text" placeholder="Search by name or email..." (keyup)="filterEvents($event)"/>
+    <button class="export-data" (click)="exportData()">Export Data</button>
+    </div>
     <table class="table table-bordered">
         <thead class="table-head">
             <tr>
@@ -11,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let event of events">
+            <tr *ngFor="let event of filteredEvents">
                 <td>{{ event.title }}</td>
                 <td>{{ event.type }}</td>
                 <td>{{ event.eventDate }}</td>
