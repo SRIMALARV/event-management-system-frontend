@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:'', component: MainComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] }   },
   {path:'host', component: HostComponent, 
     children: [
-      {path:'', component: CreateEventComponent},
+      {path:'', redirectTo:'create-event', pathMatch: 'full'},
       {path:'create-event', component: CreateEventComponent},
       {path:'my-events', component: MyEventsComponent},
       {path:'my-events/edit-event/:id', component: CreateEventComponent},

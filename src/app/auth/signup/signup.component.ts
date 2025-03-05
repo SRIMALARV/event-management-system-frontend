@@ -52,7 +52,16 @@ export class SignupComponent {
         this.router.navigate(['/home']);
       },
       (error) => {
-        console.error('Signup Failed:', error);
+        let errorMessage = 'Signup failed. Please try again.';
+
+        if (error.error && error.error.message) {
+          errorMessage = error.error.message; 
+        }
+        
+        Swal.fire({
+          icon: 'error',
+          text: errorMessage,
+        });
       }
     );
   }

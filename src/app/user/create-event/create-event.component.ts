@@ -109,7 +109,7 @@ export class CreateEventComponent {
 
   submitForm() {
     let eventData = { ...this.eventForm.value, createdBy: this.username };
-
+    console.log(eventData);
     if (this.eventId) {
       const updatedData: any = {};
       Object.keys(this.eventForm.controls).forEach((key) => {
@@ -135,7 +135,7 @@ export class CreateEventComponent {
           title: 'Success!',
           text: 'Event submitted successfully!',
         }).then(() => {
-          this.router.navigate(['/host']);
+          this.router.navigate(['host']);
         });
       },
       (error) => {

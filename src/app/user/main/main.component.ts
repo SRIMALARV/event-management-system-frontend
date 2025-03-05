@@ -25,7 +25,7 @@ export class MainComponent {
   dropdownOpen = false;
   dropdownOpenSort = false;
 
-  selectedType: string = 'Select Category';
+  selectedType: string = 'All Events';
   selectedSort: string = 'Date';
   selectedEventId: string | null = null;
 
@@ -151,8 +151,14 @@ export class MainComponent {
   /** ------------------------ REGISTRATION ------------------------ **/
 
   showRegisterForm(event: Event) {
-    this.selectedEvent = event;
     this.showRegistrationForm = true;
+    this.selectedEvent = event;
+    if (this.selectedEvent.createdBy === this.username) {
+      Swal.fire({
+        text: 'You cannot register for your event!', icon: 'error'
+      });
+      return;
+    }
 
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],

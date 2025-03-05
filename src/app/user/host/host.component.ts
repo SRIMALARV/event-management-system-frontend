@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HostApiService } from '../host-api.service';
@@ -10,7 +10,7 @@ import { ZoomService } from '../zoom.service';
 @Component({
   selector: 'app-host',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet, RouterLinkActive],
   templateUrl: './host.component.html',
   styleUrl: './host.component.css'
 })

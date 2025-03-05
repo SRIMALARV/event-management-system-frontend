@@ -11,6 +11,7 @@ import { InsightComponent } from './insight/insight.component';
 const routes: Routes = [
   {path:'', component: DashboardComponent, canActivate: [AuthGuard],data: { roles: ['ROLE_ADMIN'] },
   children: [
+    {path: '', redirectTo:'register', pathMatch: 'full'},
     {path:'register', component: CreateOrgComponent},
     {path:'organizations', component: ManageOrganizationComponent},
     {path: 'organizations/view-events/:name', component: ViewEventsComponent},

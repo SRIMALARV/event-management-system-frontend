@@ -5,9 +5,10 @@
     </div>
     <ul>
         <li routerLink="/user">Events</li>
-        <li routerLink="my-events">My events</li>
-        <li routerLink="create-event">Create event</li>
+        <li routerLink="my-events" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My events</li>
+        <li routerLink="create-event" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Create event</li>
     </ul>
+    
     <div class="user-profile">
         <img src="profile.png" class="user-profile">
         <span>{{ username }}</span>

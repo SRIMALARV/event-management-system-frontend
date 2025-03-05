@@ -57,8 +57,10 @@
     <div class="event-details" *ngIf="selectedEvent && !showRegistrationForm">
         <div class="event-details-card">
             <div class="event-details-title">
-                <img [src]="getEventImage(selectedEvent.type)" alt="Event Icon" class="event-icon">
-                <h2>{{ selectedEvent.title }}</h2>
+                <div class="event-titles">
+                    <img [src]="getEventImage(selectedEvent.type)" alt="Event Icon" class="event-icon">
+                    <h2>{{ selectedEvent.title }}</h2>
+                </div>
                 <button (click)="showRegisterForm(selectedEvent)" class="register-button">Register</button>
             </div>
 
@@ -91,11 +93,11 @@
             <p *ngIf="selectedEvent.fee"><i class="fas fa-money-bill-wave"></i> <strong>Registration Fee:</strong> {{
                 selectedEvent.fee }}</p>
 
-                <p><i class="fas fa-info-circle"></i> <strong>About the Event:</strong></p>
-                <p>{{ selectedEvent.description }}</p>
+            <p><i class="fas fa-info-circle"></i> <strong>About the Event:</strong></p>
+            <p>{{ selectedEvent.description }}</p>
 
-                <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> {{ selectedEvent.contactDetails }}</p>
-               
+            <p><i class="fas fa-phone-alt"></i> <strong>Contact:</strong> {{ selectedEvent.contactDetails }}</p>
+
         </div>
     </div>
 
@@ -115,7 +117,7 @@
             <small *ngIf="registrationForm.controls['email'].invalid && registrationForm.controls['email'].touched">
                 Valid email is required
             </small>
-            
+
             <label>Institute Name<span>*</span></label>
             <select formControlName="instituteName">
                 <option value="" disabled>Select your Institution</option>
@@ -123,29 +125,30 @@
                     {{ institute }}
                 </option>
             </select>
-            <small *ngIf="registrationForm.controls['instituteName'].invalid && registrationForm.controls['instituteName'].touched">
+            <small
+                *ngIf="registrationForm.controls['instituteName'].invalid && registrationForm.controls['instituteName'].touched">
                 Institute selection is required
             </small>
 
-    
+
             <label>Course<span>*</span></label>
             <input type="text" formControlName="course" placeholder="Your course branch">
             <small *ngIf="registrationForm.controls['course'].invalid && registrationForm.controls['course'].touched">
                 Institute selection is required
             </small>
-    
+
             <div formArrayName="teammates">
                 <h4>Teammates</h4>
                 <div *ngFor="let teammate of teammates.controls; let i = index" [formGroupName]="i">
                     <label>Teammate {{ i + 1 }} Name</label>
-                    <input type="text" formControlName="name" placeholder="Teammate Name">                 
+                    <input type="text" formControlName="name" placeholder="Teammate Name">
                 </div>
             </div>
-    
+
             <button type="submit" class="register-button">Submit</button>
             <button type="button" class="cancel-button" (click)="showRegistrationForm = false">Cancel</button>
         </form>
     </div>
-    
+
 
 </div>

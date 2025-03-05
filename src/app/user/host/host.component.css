@@ -53,7 +53,7 @@ li {
     margin-left: 30px;
 }
 
-li:hover {
+li:hover, .active {
     text-decoration: underline;
     text-decoration-color: black;
     text-decoration-thickness: 2px;

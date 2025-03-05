@@ -18,7 +18,7 @@ export class InsightComponent {
   organizationNames: string[] = [];
   eventCounts: number[] = [];
 
-  constructor(private orgApi: ManageOrgApiService) {}
+  constructor(private orgApi: ManageOrgApiService) { }
 
   ngOnInit(): void {
     this.orgApi.getOrganizations().subscribe((data) => {
@@ -26,36 +26,94 @@ export class InsightComponent {
       this.totalOrganizations = data.length;
       this.organizationNames = data.map((org: { name: string }) => org.name);
 
-      const eventRequests: Observable<any>[] = this.organizationNames.map(orgName => 
+      const eventRequests: Observable<any>[] = this.organizationNames.map(orgName =>
         this.orgApi.getEventsByOrganization(orgName)
       );
 
       forkJoin(eventRequests).subscribe((eventData: Event[][]) => {
-        this.eventCounts = eventData.map((events: Event[]) => events.length);
-        this.renderChart();
-      });      
+        let approvedCounts: number[] = [];
+        let rejectedCounts: number[] = [];
+        let pendingCounts: number[] = [];
+        let totalApproved = 0;
+      let totalRejected = 0;
+      let totalPending = 0;
+
+      eventData.forEach((events: Event[]) => {
+        const approved = events.filter(event => event.status === 'approved').length;
+        const rejected = events.filter(event => event.status === 'rejected').length;
+        const pending = events.filter(event => event.status === 'pending').length;
+
+        approvedCounts.push(approved);
+        rejectedCounts.push(rejected);
+        pendingCounts.push(pending);
+
+        totalApproved += approved;
+        totalRejected += rejected;
+        totalPending += pending;
+      });
+
+      this.renderPieChart(totalApproved, totalRejected, totalPending);
+      this.renderStackedChart(approvedCounts, rejectedCounts, pendingCounts);
+    });
     });
   }
-
-  renderChart() {
-    new Chart("eventChart", {
-      type: 'bar',
+  renderPieChart(totalApproved: number, totalRejected: number, totalPending: number) {
+    new Chart("statusPieChart", {
+      type: 'pie',
       data: {
-        labels: this.organizationNames,
+        labels: ['Approved', 'Rejected', 'Pending'],
         datasets: [{
-          label: 'Number of Events',
-          data: this.eventCounts,
-          backgroundColor: 'rgba(126, 75, 192, 0.2)',
-          borderColor: 'rgb(134, 75, 192)',
+          data: [totalApproved, totalRejected, totalPending],
+          backgroundColor: ['rgba(75, 192, 75, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(86, 165, 255, 0.6)'],
+          borderColor: ['rgb(75, 192, 75)', 'rgb(255, 99, 132)', 'rgb(86, 179, 255)'],
           borderWidth: 1
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
+      }
+    });
+  }
+  renderStackedChart(approvedCounts: number[], rejectedCounts: number[], pendingCounts: number[]) {
+    new Chart("statusBarChart", {
+      type: 'bar',
+      data: {
+        labels: this.organizationNames,
+        datasets: [
+          {
+            label: 'Approved',
+            data: approvedCounts,
+            backgroundColor: 'rgba(75, 192, 75, 0.6)',
+            borderColor: 'rgb(75, 192, 75)',
+            borderWidth: 1
+          },
+          {
+            label: 'Rejected',
+            data: rejectedCounts,
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 1
+          },
+          {
+            label: 'Pending',
+            data: pendingCounts,
+            backgroundColor: 'rgba(86, 165, 255, 0.6)',
+            borderColor: 'rgb(86, 179, 255)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
         scales: {
           y: {
-            beginAtZero: true
-          }
+            beginAtZero: true,
+            stacked: true
+          },
+          x: {
+            stacked: true
+          }         
         }
       }
     });
