@@ -160,6 +160,16 @@ export class MainComponent {
       return;
     }
 
+    if (this.username) {
+      this.registrationService.getRegistrationsByUsername(this.username).subscribe(registrations => {
+        const selectedEventId = this.selectedEvent?.id;
+        const isRegistered = registrations.some(registration => registration.eventId === selectedEventId);
+        if (isRegistered) {
+          Swal.fire({ text: 'You have already registered for this event!', icon: 'error' });
+        }
+      });
+    }
+
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
