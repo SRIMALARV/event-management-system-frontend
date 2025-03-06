@@ -4,7 +4,7 @@ import { OrgApiService } from '../org-api.service';
 import { Event } from '../../model/event.model';
 import { CommonModule } from '@angular/common';
 import { RegistrationApiService } from '../../user/registration-api.service';
-import * as moment from 'moment-timezone';
+import moment from 'moment';
 
 @Component({
   selector: 'app-view-event',
@@ -35,9 +35,7 @@ export class ViewEventComponent {
     this.eventService.getEventById(this.eventId).subscribe(
       (data) => {
         this.event = data;
-        this.eventTimeUTC = this.event?.eventTime ?? '';  
-        console.log("Fetched eventTime:", this.eventTimeUTC);
-        this.eventTimeLocal = this.convertToLocalTime(this.eventTimeUTC);
+        this.event.eventTime = moment(this.event.eventTime, 'HH:mm').format('hh:mm A');
         this.registrationApi.getRegistrationsByEvent(this.eventId ?? '').subscribe({
           next: (registrations) => {
             this.event.registeredCount = registrations.length;
@@ -49,13 +47,5 @@ export class ViewEventComponent {
       }
     );
   }
-  convertToLocalTime(utcTime: string): string {
-    const utcMoment = moment.utc(utcTime, moment.ISO_8601);
-    console.log("UTC Time:", utcMoment.format()); // Should show correct UTC
-  
-    const localTime = utcMoment.tz(moment.tz.guess());
-    console.log("Local Time:", localTime.format()); // Should show correct local time
-  
-    return localTime.format('hh:mm A');
-  }
+ 
 }

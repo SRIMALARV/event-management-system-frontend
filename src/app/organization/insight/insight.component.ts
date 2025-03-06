@@ -15,10 +15,14 @@ import { Observable, forkJoin } from 'rxjs';
 })
 export class InsightComponent {
   institutes: string[] = [];
-  registrationsPerInstitute: { [key: string]: number } = {}; 
+  registrationsPerInstitute: { [key: string]: number } = {};
   organization: string | null = null;
   events: Event[] = [];
   eventIdsUnderOrg: string[] = [];
+  
+  totalEvents: number = 0;
+  totalRegistrations: number = 0;
+  approvedEvents: number = 0;
 
   constructor(
     private registrationApi: RegistrationApiService, 
@@ -43,6 +47,8 @@ export class InsightComponent {
       const encodedOrganization = encodeURIComponent(this.organization ?? '');
       this.orgApi.getEventsByOrganization(encodedOrganization).subscribe(data => {
         this.events = data;
+        this.totalEvents = data.length;
+        this.approvedEvents = data.filter(event => event.status === 'approved').length;
         this.eventIdsUnderOrg = this.events.map(event => event.id ?? ''); 
         resolve();
       });
@@ -56,6 +62,7 @@ export class InsightComponent {
 
     forkJoin(registrationRequests).subscribe(registrationData => {
       this.registrationsPerInstitute = {};
+      this.totalRegistrations = 0;
 
       this.institutes.forEach((institute, index) => {
         const filteredRegistrations = registrationData[index]?.filter(reg =>
@@ -63,6 +70,7 @@ export class InsightComponent {
         ) || [];
 
         this.registrationsPerInstitute[institute] = filteredRegistrations.length;
+        this.totalRegistrations += filteredRegistrations.length;
       });
 
       this.renderChart();
@@ -79,8 +87,8 @@ export class InsightComponent {
         datasets: [{
           label: 'Number of Registrations',
           data: Object.values(this.registrationsPerInstitute),
-          backgroundColor: 'rgba(54, 162, 235, 0.5)',
-          borderColor: 'rgba(54, 162, 235, 1)',
+          backgroundColor: 'rgba(160, 54, 235, 0.5)',
+          borderColor: 'rgba(123, 54, 235, 0.86)',
           borderWidth: 1
         }]
       },
@@ -115,5 +123,4 @@ export class InsightComponent {
       }
     });
   }
-  
 }
