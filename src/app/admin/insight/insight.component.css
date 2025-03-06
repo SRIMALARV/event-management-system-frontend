@@ -1,4 +1,15 @@
-#statusPieChart {
-    margin-top: 50px;
-    width: 50%;
+.pie-chart canvas {
+    width: 700px !important;
+    height: 400px !important;
+    margin-left: 70px;
+}
+
+h3 {
+    color: #5a3e81;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#statusBarChart {
+    margin-bottom: 20px;
 }

@@ -8,7 +8,7 @@
         <li>Home</li>
         <li (click)="navigateTo('user')">Events</li>
         <li (click)="navigateTo('user/host')">Host</li>
-        <li (click)="scrollToFooter()">Feedback</li>
+        <li (click)="scrollToFooter()" *ngIf="role !== 'ROLE_ADMIN'">Feedback</li>
     </ul>
     <div *ngIf="username; else showSignup" class="user-info">
         <div class="user-profile" *ngIf="role !== 'ROLE_ORGANIZATION'">

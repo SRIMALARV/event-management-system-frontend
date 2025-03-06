@@ -19,4 +19,8 @@ export class DataApiService {
   getEventsByOrganization(organization: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.API_BASE_URL}/api/organization/${organization}`);
   }
+
+  getMonthlyRegistrations(year: number): Observable<any> {
+    return this.http.get<any>(`${this.API_BASE_URL}/api/registrations/monthly/${year}`);
+  }
 }

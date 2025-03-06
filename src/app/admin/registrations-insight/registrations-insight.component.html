@@ -1,0 +1,12 @@
+<div class="chart-container">
+    <div class="container">
+        <h3>Registrations - Month wise</h3>
+        <label for="year">Select Year:</label>
+        <select id="year" [(ngModel)]="selectedYear" (change)="onYearChange()">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+    </div>
+    <div class="chart">
+        <canvas id="registrationChart"></canvas>
+    </div>
+</div>

@@ -7,6 +7,7 @@ import { ManageOrganizationComponent } from './manage-organization/manage-organi
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ViewEventsComponent } from './view-events/view-events.component';
 import { InsightComponent } from './insight/insight.component';
+import { RegistrationsInsightComponent } from './registrations-insight/registrations-insight.component';
 
 const routes: Routes = [
   {path:'', component: DashboardComponent, canActivate: [AuthGuard],data: { roles: ['ROLE_ADMIN'] },
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'organizations/view-events/:name', component: ViewEventsComponent},
     {path:'feedback', component: FeedbackComponent},
     {path:'insight', component: InsightComponent},
+    {path:'registrations', component: RegistrationsInsightComponent},
   ]
 },
 ];

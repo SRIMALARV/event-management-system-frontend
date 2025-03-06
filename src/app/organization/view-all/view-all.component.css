@@ -51,6 +51,10 @@ input {
     font-weight: normal;
 }
 
+tbody tr {
+    color:  rgb(59, 59, 59);
+}
+
 .table-head th:first-child,
 .table-head th:last-child,
 tbody td:first-child,

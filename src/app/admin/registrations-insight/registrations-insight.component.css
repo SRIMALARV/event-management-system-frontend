@@ -1,0 +1,33 @@
+.container {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    height: 100vh; 
+    text-align: center; 
+    margin-left: 50px;
+}
+
+h3 {
+    color: #5a3e81;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+select {
+    margin: auto 5px;
+    padding: 5px 10px;
+    background-color: white;
+    color: rgb(85, 18, 148);
+    border: 1px solid rgb(85, 18, 148);
+    border-radius: 5px;
+}
+
+.chart {
+    width: 75%;
+    margin: 10px auto;
+}
