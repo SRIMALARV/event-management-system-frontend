@@ -33,7 +33,6 @@ export class LoginComponent {
 
     this.authService.login(username, password).subscribe(
       (response) => {
-        console.log('Login Success:', response);
         this.authService.setToken(response.token);
         this.authService.setRole(response.roles[0]);
         Swal.mixin({
@@ -52,7 +51,6 @@ export class LoginComponent {
         this.redirectUser(response.roles[0]);
       },
       (error) => {
-        console.error('Login Failed:', error);
         this.errorMessage = "Invalid username or password!";
       }
     );

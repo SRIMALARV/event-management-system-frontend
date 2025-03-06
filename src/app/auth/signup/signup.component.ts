@@ -33,7 +33,6 @@ export class SignupComponent {
 
     this.authService.signup(username, email, password).subscribe(
       (response) => {
-        console.log('Signup Success:', response);
         this.authService.setToken(response.token);
         this.authService.setRole(response.roles[0]);
         Swal.mixin({
