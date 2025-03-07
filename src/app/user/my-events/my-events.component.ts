@@ -5,9 +5,9 @@ import { CommonModule } from '@angular/common';
 import { RegistrationApiService } from '../registration-api.service';
 import { RouterLink } from '@angular/router';
 import { Registration } from '../../model/regsitration.model';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
 import { ExportDataService } from '../../export-data.service';
+import moment from 'moment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-my-events',
@@ -21,6 +21,7 @@ export class MyEventsComponent {
   username: string | null = null;
   isLoading = true;
   registrationData: { [eventId: string]: Registration[] } = {};
+  showCompletionStatus = false;
 
   constructor(private hostApi: HostApiService, private registrationApi: RegistrationApiService,
     private exportDataApi: ExportDataService) { }
@@ -36,6 +37,14 @@ export class MyEventsComponent {
         this.myEvents = events;
 
         this.myEvents.forEach(event => {
+          event.eventTime = moment(event.eventTime, 'HH:mm').format('hh:mm A');
+          const currentDate = new Date();
+          if (new Date(event.eventDate) <= currentDate && event.completionStatus === 'incomplete') {
+            this.showCompletionStatus = true;
+          }
+          else if(new Date(event.eventDate) <= currentDate && event.completionStatus === 'completed') {
+            this.showCompletionStatus = false;
+          }
           this.registrationApi.getRegistrationsByEvent(event.id ?? '').subscribe({
             next: (registrations) => {
               this.registrationData[event.id ?? ''] = registrations;
@@ -50,6 +59,29 @@ export class MyEventsComponent {
         this.isLoading = false;
       }
     });
+  }
+
+  completionStatus(eventId: string): void {
+    Swal.fire({
+      title: 'Event Completion',
+      text: 'Did you successfully host the event?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.hostApi.changeCompletionStatus(eventId, 'completed').subscribe({
+          next: (response) => {
+            Swal.fire({
+              text: 'Event completion marked!', icon: 'success'
+            });
+          },
+          error: (error) => {
+            Swal.fire({ text: 'Failed to update event status.', icon: 'error' });
+        }
+        })
+      }
+    })
   }
 
   exportRegistrationData(eventId: string, title: string): void {

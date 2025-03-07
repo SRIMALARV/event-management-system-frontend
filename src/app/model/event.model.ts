@@ -21,4 +21,5 @@ export interface Event {
   createdBy?: string;
   status?: string;
   registeredCount?: number;
+  completionStatus?: string;
 }

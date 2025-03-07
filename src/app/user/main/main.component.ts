@@ -154,7 +154,6 @@ export class MainComponent {
   /** ------------------------ REGISTRATION ------------------------ **/
 
   showRegisterForm(event: Event) {
-    this.showRegistrationForm = true;
     this.selectedEvent = event;
     if (this.selectedEvent.createdBy === this.username) {
       Swal.fire({
@@ -169,9 +168,13 @@ export class MainComponent {
         const isRegistered = registrations.some(registration => registration.eventId === selectedEventId);
         if (isRegistered) {
           Swal.fire({ text: 'You have already registered for this event!', icon: 'error' });
+          this.showRegistrationForm = false;
+          return;
         }
       });
     }
+    this.showRegistrationForm = true;
+
 
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],

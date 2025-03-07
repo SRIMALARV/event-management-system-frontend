@@ -63,7 +63,7 @@
     cursor: pointer;
 }
 
-.edit-btn {
+.edit-btn, .completed-btn {
     background-color: white;
     border: 1.5px solid rgb(78, 15, 154);
     color: rgb(88, 43, 142);
@@ -76,6 +76,13 @@
 
 .edit-btn:hover {
     background-color: rgb(221, 193, 255);
-    border: 1.5px solid rgb(78, 15, 154);
-    color: rgb(88, 43, 142);
+}
+
+.completed-btn {
+    border: 1.5px solid rgb(15, 154, 36);
+    color: rgb(15, 154, 36);
+}
+
+.completed-btn:hover {
+    background-color: rgb(193, 255, 205);
 }
