@@ -2,6 +2,18 @@
     <h2>Organization Events</h2>
     <div class="data">
     <input type="text" placeholder="Search by name or email..." (keyup)="filterEvents($event)"/>
+    <div class="dropdown">
+        <button class="dropdown-btn" (click)="toggleDropdown()">
+            {{ selectedOption }} ▼
+        </button>
+        <ul class="dropdown-menu" *ngIf="dropdownOpen">
+            <li (click)="filterByType('All Events')">All Events</li>
+            <li (click)="filterByType('Pending')">Pending</li>
+            <li (click)="filterByType('Ongoing')">Ongoing</li>
+            <li (click)="filterByType('Completed')">Completed</li>
+            <li (click)="filterByType('Expired')">Expired</li>
+        </ul>
+    </div>
     <button class="export-data" (click)="exportData()">Export Data</button>
     </div>
     <table class="table table-bordered">
@@ -10,7 +22,8 @@
                 <th>Title</th>
                 <th>Type</th>
                 <th>Date</th>
-                <th>Status</th>
+                <th *ngIf="!showOptions">Status</th>
+                <th *ngIf="showOptions">Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,13 +32,16 @@
                 <td>{{ event.title }}</td>
                 <td>{{ event.type }}</td>
                 <td>{{ event.eventDate }}</td>
-                <td [ngClass]="{'approved': event.status === 'approved', 'rejected': event.status === 'rejected',  'pending': event.status === 'pending' }">
+                <td *ngIf="!showOptions" [ngClass]="{'approved': event.status === 'approved', 'rejected': event.status === 'rejected',  'pending': event.status === 'pending' }">
                     {{ event.status }}
+                </td>
+                <td *ngIf="showOptions" [ngClass]="{'approved': event.completionStatus === 'completed', 'rejected': event.completionStatus === 'incomplete' }">
+                    {{ event.completionStatus }}
                 </td>
                 <td class="action-btns">
                     <button class="view-btn" [routerLink]="['view-event', event.id]">View</button>
-                    <button class="approve-btn" (click)="event.id && updateStatus(event.id, 'approved')">Approve</button>
-                    <button class="reject-btn" (click)="event.id && updateStatus(event.id, 'rejected')">Reject</button>
+                    <button *ngIf="!showOptions" class="approve-btn" (click)="event.id && updateStatus(event.id, 'approved')">Approve</button>
+                    <button *ngIf="!showOptions" class="reject-btn" (click)="event.id && updateStatus(event.id, 'rejected')">Reject</button>
                 </td>
             </tr>
         </tbody>

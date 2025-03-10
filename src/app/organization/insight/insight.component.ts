@@ -82,8 +82,7 @@ export class InsightComponent {
       type: 'line',
       data: {
         labels: Object.keys(this.registrationsPerInstitute).map(name => 
-          name.length > 10 ? name.substring(0, 10) + '...' : name
-        ), 
+          name.length > 10 ? name.substring(0, 10) + '...' : name ), 
         datasets: [{
           label: 'Number of Registrations',
           data: Object.values(this.registrationsPerInstitute),

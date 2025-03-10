@@ -1,15 +1,5 @@
-@font-face {
-    font-family: 'CustomFont';
-    src: url('https://d8it4huxumps7.cloudfront.net/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'CustomFont', sans-serif;
+.org-container {
+    position: absolute;
 }
 
 .container {
@@ -23,6 +13,8 @@
     background: linear-gradient(to right, #3a0d62, #6228b5, #9a50ff);
     padding: 15px 20px;
     color: white;
+    width: 100%;
+    position: fixed;
 }
 
 .sidebar {
@@ -71,4 +63,6 @@
     margin-left: 250px;
     background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(243, 201, 255, 0.048231792717086885) 61%, rgba(202, 141, 255, 0.13506652661064422) 89%);
     flex-grow: 1;
+    margin-top: 50px;
+    width: 95%;
 }

@@ -17,6 +17,9 @@ export class ViewAllComponent {
   organization: string | null = null;
   events: Event[] = [];
   filteredEvents: Event[] = [];
+  dropdownOpen: boolean = false;
+  selectedOption: string = 'All Events';
+  showOptions: boolean = false;
 
   constructor(private eventService: OrgApiService, private exportDataApi: ExportDataService) { }
 
@@ -34,6 +37,10 @@ export class ViewAllComponent {
     });
   }
 
+  toggleDropdown() {
+    this.dropdownOpen =true;
+  }
+
   filterEvents(event: any): void {
     const query = event.target.value.toLowerCase();
  
@@ -41,6 +48,35 @@ export class ViewAllComponent {
       event.title.toLowerCase().includes(query) ||
       event.type.toLowerCase().includes(query)
     ) || [];
+  }
+
+  filterByType(type: string) {
+    this.dropdownOpen = false;
+    const currentDate = new Date();
+    this.selectedOption = type;
+    this.showOptions = false;
+
+    switch(type) {
+      case 'Pending':
+        this.filteredEvents = this.events.filter(event => 
+          event.status === 'pending' && new Date(event.registrationDeadline) > currentDate );
+        break;
+      case 'Expired':
+        this.filteredEvents = this.events.filter(event => 
+          event.status === 'pending' && new Date(event.registrationDeadline) <= currentDate );
+        break;
+      case 'Ongoing':
+        this.filteredEvents = this.events.filter(event => 
+          (event.status === 'approved' || event.status === 'rejected') && new Date(event.eventDate) > currentDate);
+        break;
+      case 'Completed':
+        this.filteredEvents = this.events.filter(event => 
+          event.status === 'approved' && new Date(event.eventDate) <= currentDate );
+          this.showOptions = true;
+        break;
+      default:
+        this.filteredEvents = [...this.events]; 
+    }
   }
 
   exportData():void {

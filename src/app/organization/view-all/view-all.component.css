@@ -120,3 +120,45 @@ button {
     border: 1.5px solid rgb(150, 11, 11);
     color:  rgb(150, 11, 11);
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 300px;
+}
+
+.dropdown-btn {
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgb(78, 15, 154);
+    color: rgb(78, 15, 154);
+    border-radius: 0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.dropdown-btn:hover {
+    background-color: #f2dcff;
+}
+
+.dropdown-menu {
+    position: absolute;
+    list-style: none;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px 0;
+    width: 200px;
+    display: block;
+    border-radius: 5px;
+    color: #383838;
+    font-size: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+    background: #f2dcff;
+}
