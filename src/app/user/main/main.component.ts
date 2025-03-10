@@ -70,6 +70,8 @@ export class MainComponent {
         const currentDate = new Date();
         this.events = data.filter(event => new Date(event.registrationDeadline) >= currentDate);
         this.filteredEvents = [...this.events];
+        this.selectedEventId = this.filteredEvents[0].id ?? '';
+        this.selectedEvent = this.filteredEvents[0] ?? '';
       },
       error: (error) => {
         console.error(error);

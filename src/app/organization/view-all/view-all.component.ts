@@ -38,12 +38,12 @@ export class ViewAllComponent {
   }
 
   toggleDropdown() {
-    this.dropdownOpen =true;
+    this.dropdownOpen = true;
   }
 
   filterEvents(event: any): void {
     const query = event.target.value.toLowerCase();
- 
+
     this.filteredEvents = this.events?.filter(event =>
       event.title.toLowerCase().includes(query) ||
       event.type.toLowerCase().includes(query)
@@ -56,30 +56,30 @@ export class ViewAllComponent {
     this.selectedOption = type;
     this.showOptions = false;
 
-    switch(type) {
+    switch (type) {
       case 'Pending':
-        this.filteredEvents = this.events.filter(event => 
-          event.status === 'pending' && new Date(event.registrationDeadline) > currentDate );
+        this.filteredEvents = this.events.filter(event =>
+          event.status === 'pending' && new Date(event.registrationDeadline) > currentDate);
         break;
       case 'Expired':
-        this.filteredEvents = this.events.filter(event => 
-          event.status === 'pending' && new Date(event.registrationDeadline) <= currentDate );
+        this.filteredEvents = this.events.filter(event =>
+          event.status === 'pending' && new Date(event.registrationDeadline) <= currentDate);
         break;
       case 'Ongoing':
-        this.filteredEvents = this.events.filter(event => 
+        this.filteredEvents = this.events.filter(event =>
           (event.status === 'approved' || event.status === 'rejected') && new Date(event.eventDate) > currentDate);
         break;
       case 'Completed':
-        this.filteredEvents = this.events.filter(event => 
-          event.status === 'approved' && new Date(event.eventDate) <= currentDate );
-          this.showOptions = true;
+        this.filteredEvents = this.events.filter(event =>
+          event.status === 'approved' && new Date(event.eventDate) <= currentDate);
+        this.showOptions = true;
         break;
       default:
-        this.filteredEvents = [...this.events]; 
+        this.filteredEvents = [...this.events];
     }
   }
 
-  exportData():void {
+  exportData(): void {
     const eventsData = this.events;
 
     if (!eventsData || eventsData.length === 0) {
@@ -100,23 +100,34 @@ export class ViewAllComponent {
   }
 
   updateStatus(eventId: string, status: string): void {
-    if (status === 'rejected') {
-      Swal.fire({
-        title: 'Enter Rejection Reason',
-        input: 'textarea',
-        inputPlaceholder: 'Enter the reason for rejection...',
-        showCancelButton: true,
-        confirmButtonText: 'Reject',
-        cancelButtonText: 'Cancel'
-      }).then((result) => {
-        if (result.isConfirmed && result.value) {
-          this.sendStatusUpdate(eventId, status, result.value);
+    Swal.fire({
+      text: `Do you want to ${status} the event?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((confirmResult) => {
+      if (confirmResult.isConfirmed) {
+        if (status === 'rejected') {
+          Swal.fire({
+            title: 'Enter Rejection Reason',
+            input: 'textarea',
+            inputPlaceholder: 'Enter the reason for rejection...',
+            showCancelButton: true,
+            confirmButtonText: 'Reject',
+            cancelButtonText: 'Cancel'
+          }).then((rejectResult) => {
+            if (rejectResult.isConfirmed && rejectResult.value) {
+              this.sendStatusUpdate(eventId, status, rejectResult.value);
+            }
+          });
+        } else {
+          this.sendStatusUpdate(eventId, status, '');
         }
-      });
-    } else {
-      this.sendStatusUpdate(eventId, status, '');
-    }
+      }
+    });
   }
+
   sendStatusUpdate(eventId: string, status: string, reason: string): void {
     this.eventService.updateEventStatus(eventId, status, reason).subscribe(() => {
       this.fetchEvents();

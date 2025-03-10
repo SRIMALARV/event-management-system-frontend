@@ -16,6 +16,7 @@ export class RegistrationsInsightComponent {
   selectedYear: number = new Date().getFullYear();
   years: number[] = [];
   chart: any;
+  totalRegistrations: number = 0;
 
   constructor(private registrationApi: DataApiService) {}
 
@@ -42,6 +43,7 @@ export class RegistrationsInsightComponent {
 
     registrationData.forEach(item => {
       months[item.month - 1] = item.count;
+      this.totalRegistrations += item.count;
     });
 
     if (this.chart) {
@@ -62,6 +64,7 @@ export class RegistrationsInsightComponent {
       }
     });
   }
+
 
   onYearChange(): void {
     this.loadRegistrations();

@@ -135,7 +135,7 @@ export class CreateEventComponent {
           title: 'Success!',
           text: 'Event submitted successfully!',
         }).then(() => {
-          this.router.navigate(['host']);
+          this.router.navigate(['/host']);
         });
       },
       (error) => {

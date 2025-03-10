@@ -12,11 +12,13 @@ import { Event } from '../../model/event.model';
   styleUrl: './insight.component.css'
 })
 export class InsightComponent {
-
   organizations: any[] = [];
   totalOrganizations: number = 0;
   organizationNames: string[] = [];
-  eventCounts: number[] = [];
+  totalApproved: number = 0;
+  totalRejected: number = 0;
+  totalPending: number = 0;
+  totalEvents: number = 0;
 
   constructor(private orgApi: ManageOrgApiService) { }
 
@@ -34,27 +36,24 @@ export class InsightComponent {
         let approvedCounts: number[] = [];
         let rejectedCounts: number[] = [];
         let pendingCounts: number[] = [];
-        let totalApproved = 0;
-      let totalRejected = 0;
-      let totalPending = 0;
 
-      eventData.forEach((events: Event[]) => {
-        const approved = events.filter(event => event.status === 'approved').length;
-        const rejected = events.filter(event => event.status === 'rejected').length;
-        const pending = events.filter(event => event.status === 'pending').length;
+        eventData.forEach((events: Event[]) => {
+          const approved = events.filter(event => event.status === 'approved').length;
+          const rejected = events.filter(event => event.status === 'rejected').length;
+          const pending = events.filter(event => event.status === 'pending').length;
 
-        approvedCounts.push(approved);
-        rejectedCounts.push(rejected);
-        pendingCounts.push(pending);
+          approvedCounts.push(approved);
+          rejectedCounts.push(rejected);
+          pendingCounts.push(pending);
 
-        totalApproved += approved;
-        totalRejected += rejected;
-        totalPending += pending;
+          this.totalApproved += approved;
+          this.totalRejected += rejected;
+          this.totalPending += pending;
+          this.totalEvents = this.totalApproved + this.totalPending + this.totalRejected;
+        });
+        this.renderPieChart(this.totalApproved, this.totalRejected, this.totalPending);
+        this.renderStackedChart(approvedCounts, rejectedCounts, pendingCounts);
       });
-
-      this.renderPieChart(totalApproved, totalRejected, totalPending);
-      this.renderStackedChart(approvedCounts, rejectedCounts, pendingCounts);
-    });
     });
   }
   renderPieChart(totalApproved: number, totalRejected: number, totalPending: number) {
@@ -113,7 +112,7 @@ export class InsightComponent {
           },
           x: {
             stacked: true
-          }         
+          }
         }
       }
     });

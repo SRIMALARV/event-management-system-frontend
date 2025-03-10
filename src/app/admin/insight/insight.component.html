@@ -1,7 +1,22 @@
-<h3>Institution Wise Events</h3>
-<canvas id="statusBarChart"></canvas>
-<div class="pie-chart">
-<h3>Overall Events</h3>
-<canvas id="statusPieChart"></canvas>
+<div class="insight-container">
+    <div class="card-container">
+        <div class="card">
+            <h3>Total Events Created</h3>
+            <p>{{ totalEvents }}</p>
+        </div>
+        <div class="card">
+            <h3>Approved Events</h3>
+            <p>{{ totalApproved }}</p>
+        </div>
+        <div class="card">
+            <h3>Yet to be Approve</h3>
+            <p>{{ totalPending }}</p>
+        </div>
+    </div>
+    <h3>Institution Wise Events</h3>
+    <canvas id="statusBarChart"></canvas>
+    <div class="pie-chart">
+        <h3>Overall Events</h3>
+        <canvas id="statusPieChart"></canvas>
+    </div>
 </div>
-
