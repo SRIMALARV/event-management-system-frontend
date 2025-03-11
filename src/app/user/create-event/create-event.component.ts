@@ -144,19 +144,17 @@ export class CreateEventComponent {
     );
   }
 
-
-
   scheduleMeeting() {
     if (this.meetingForm.valid) {
       const formData = this.meetingForm.value;
 
-      const userTimeZone = moment.tz.guess(); 
+      const userTimeZone = moment.tz.guess();
       const startTime = moment.tz(formData.start_time, userTimeZone).utc().format();
 
       const meetingData = {
         ...formData,
-        start_time: startTime, 
-        timezone: userTimeZone, 
+        start_time: startTime,
+        timezone: userTimeZone,
         type: 2
       };
 
@@ -172,9 +170,9 @@ export class CreateEventComponent {
     }
   }
 
-    logout() {
-      this.authService.logout();
-      window.location.reload();
-    }
+  logout() {
+    this.authService.logout();
+    window.location.reload();
+  }
 }
 
