@@ -221,7 +221,7 @@ li:hover {
     background: radial-gradient(circle, rgba(36, 0, 81, 0.9) 0%, rgba(41, 2, 79, 0.854) 100%);
     padding: 20px;
     display: flex;
-    gap: 50px;
+    justify-content: space-between;
     margin-top: 30px;
     padding-right: 0;
     color: rgb(230, 207, 255);
@@ -271,17 +271,35 @@ li:hover {
     font-size: 15px;
     margin-bottom: 15px;
 }
-.social-media, .contact {
+.contact {
     flex: 1;
     margin: 10px;
 }
 
 .social-icons {
     display: flex;
+    gap: 15px;
 }
 
-.social-icons a {
-    color: white;
-    font-size: 24px;
-    text-decoration: none;
+.social-icons i {
+    font-size: 20px;
+}
+
+.footer-connect {
+    margin-top:30px;
+    margin-right: 100px;
+}
+
+.web-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.footer-connect img{
+    width: 50px;
+}
+
+.footer-connect h3 {
+    margin-top: 40px;
 }
