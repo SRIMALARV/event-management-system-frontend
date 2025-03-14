@@ -9,8 +9,8 @@
       <p><strong>Date:</strong> {{ event.eventDate }} at {{ event.eventTime }}</p>
       <p><strong>Duration:</strong> {{ event.eventDuration }} minutes</p>
       <p><strong>Mode:</strong> {{ event.eventMode }}</p>
-      <p><strong>Location:</strong> {{ event.location || 'N/A' }}</p>
-      <p><strong>Fee:</strong> {{ event.fee ? '₹' + event.fee : 'Free' }}</p>
+      <p><strong>Type:</strong> {{ event.type }}</p>
+      <p><strong>Deadline:</strong> {{ event.registrationDeadline }}</p>
       <p><strong>Participants:</strong> {{ event.minParticipants }} - {{ event.maxParticipants || 'Unlimited' }}</p>
       <p><strong>Hosted by:</strong> {{ event.instituteName }}</p>
 
