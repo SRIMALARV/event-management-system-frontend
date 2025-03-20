@@ -26,7 +26,6 @@ export class ViewAllComponent {
   ngOnInit(): void {
     this.organization = localStorage.getItem('username');
     this.fetchEvents();
-    console.log(this.organization);
   }
 
   fetchEvents(): void {

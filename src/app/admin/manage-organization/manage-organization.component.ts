@@ -45,7 +45,6 @@ export class ManageOrganizationComponent {
             cancelButtonText: 'Cancel'
           }).then((result) => {
             if (result.isConfirmed && result.value) {
-              console.log(institute);
               this.manageOrgApi.changePassword(institute.name, result.value).subscribe({
                 next: () => {
                   Swal.fire({text: "Password Changed successfully", icon: 'success'})

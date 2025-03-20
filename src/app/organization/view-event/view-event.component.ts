@@ -25,7 +25,6 @@ export class ViewEventComponent {
 
   ngOnInit(): void {
     this.eventId = this.route.snapshot.paramMap.get('id') || '';
-    console.log(this.eventId);
     if (this.eventId) {
       this.fetchEventDetails();
     }

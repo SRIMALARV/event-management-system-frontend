@@ -18,6 +18,7 @@ export class HomeComponent {
   username: string | null = null;
   role: string | null = null;
   feedbackText: string = '';
+  maxCharacters: number = 100;
 
   constructor(private authService: AuthService, private router: Router, private feedbackApi: AdminApiService) { }
   ngOnInit(): void {
@@ -79,6 +80,12 @@ export class HomeComponent {
       this.moveToLogin();
       return;
     }
+    if (this.feedbackText.length > this.maxCharacters) {
+      Swal.fire({
+        text: `Feedback Cannot exceed ${this.maxCharacters} characters `, icon: 'warning', title: 'Empty Field'
+      })
+      return;
+    }
     const feedback: Feedback = {
       username: this.username,
       feedback: this.feedbackText
@@ -88,6 +95,7 @@ export class HomeComponent {
       Swal.fire({
         text: 'Please enter some feedback before submitting!', icon: 'warning', title: 'Empty Field'
       })
+      return;
     } else {
       this.feedbackApi.sendFeedback(feedback).subscribe({
         next: (response) => {

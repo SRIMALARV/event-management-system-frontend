@@ -78,9 +78,7 @@ export class CreateEventComponent {
       next: (data) => {
         this.institutes = data;
       },
-      error: (error) => {
-        console.error('Error fetching institutes:', error);
-      }
+      error: (error) => { }
     });
   }
 
@@ -89,9 +87,7 @@ export class CreateEventComponent {
       next: (eventData: Event) => {
         this.eventForm.patchValue(eventData);
       },
-      error: () => {
-        console.error('Error fetching event details');
-      }
+      error: () => { }
     });
   }
 
@@ -109,7 +105,6 @@ export class CreateEventComponent {
 
   submitForm() {
     let eventData = { ...this.eventForm.value, createdBy: this.username };
-    console.log(eventData);
     if (this.eventId) {
       const updatedData: any = {};
       Object.keys(this.eventForm.controls).forEach((key) => {
@@ -138,9 +133,7 @@ export class CreateEventComponent {
           this.router.navigate(['/host']);
         });
       },
-      (error) => {
-        console.error('Error submitting event:', error);
-      }
+      (error) => { }
     );
   }
 
@@ -160,12 +153,9 @@ export class CreateEventComponent {
 
       this.zoomService.createMeeting(meetingData).subscribe(
         (response) => {
-          console.log('Meeting created:', response);
           this.meetingDetails = response;
         },
-        (error) => {
-          console.error('Error creating meeting:', error);
-        }
+        (error) => { }
       );
     }
   }

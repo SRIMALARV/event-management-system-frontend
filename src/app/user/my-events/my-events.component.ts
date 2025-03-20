@@ -55,7 +55,6 @@ export class MyEventsComponent {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Error fetching events:', error);
         this.isLoading = false;
       }
     });

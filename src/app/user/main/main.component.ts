@@ -73,9 +73,7 @@ export class MainComponent {
         this.selectedEventId = this.filteredEvents[0].id ?? '';
         this.selectedEvent = this.filteredEvents[0] ?? '';
       },
-      error: (error) => {
-        console.error(error);
-      }
+      error: (error) => { }
     });
   }
 
@@ -100,9 +98,7 @@ export class MainComponent {
       next: (data) => {
         this.filteredEvents = data.filter(event => event.status === "approved");
       },
-      error: (error) => {
-        console.error("Error fetching events by type:", error);
-      }
+      error: (error) => { }
     });
   }
 
@@ -115,9 +111,7 @@ export class MainComponent {
         next: (data) => {
           this.filteredEvents = data.filter(event => event.status === "approved");
         },
-        error: (error) => {
-          console.error("Error while sorting: ", error);
-        }
+        error: (error) => { }
       });
     }
     else {
@@ -125,9 +119,7 @@ export class MainComponent {
         next: (data) => {
           this.filteredEvents = data.filter(event => event.status === "approved");
         },
-        error: (error) => {
-          console.error("Error while sorting all events: ", error);
-        }
+        error: (error) => { }
       });
     }
   }
@@ -139,9 +131,7 @@ export class MainComponent {
         this.selectedEvent = data;
         this.selectedEvent.eventTime = moment(this.selectedEvent.eventTime, 'HH:mm').format('hh:mm A');
       },
-      error: (error) => {
-        console.error("Error fetching event details", error);
-      }
+      error: (error) => { }
     });
   }
 
@@ -193,9 +183,7 @@ export class MainComponent {
       next: (data) => {
         this.institutes = data;
       },
-      error: (error) => {
-        console.error(error);
-      }
+      error: (error) => { }
     })
   }
 
@@ -224,7 +212,6 @@ export class MainComponent {
     registrationData.username = localStorage.getItem('username') ?? '';
 
     registrationData.teammates = this.teammates.value.map((teammate: { name: string }) => teammate.name);
-    console.log("data:", registrationData);
 
     this.registrationService.saveRegistration(registrationData).subscribe({
       next: (response) => {

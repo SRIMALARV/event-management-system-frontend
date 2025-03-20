@@ -61,6 +61,7 @@
         <h3>FEEDBACK</h3>
         <p>We'd love your feedback!</p>
         <textarea placeholder="Write your feedback here..." [(ngModel)]="feedbackText"></textarea>
+        <p>{{ feedbackText.length }} / {{ maxCharacters }} characters</p>
         <button (click)="submitFeedback()">Submit</button>
     </div>
 

@@ -25,8 +25,6 @@ export class AuthService {
           this.setToken(response.token);
           this.setRole(response.roles[0]);
           this.setUsername(response.username);
-          console.log("token: ", response.token);
-          console.log("role: ", response.roles[0]);
         },
         error: (error) => { console.error("Login fail(tap):", error); }
       })
@@ -39,8 +37,6 @@ export class AuthService {
           this.setToken(response.token);
           this.setRole(response.roles[0]);
           this.setUsername(response.username);
-          console.log("token: ", response.token);
-          console.log("role: ", response.roles[0]);
         },
         error: (error) => { console.error("Signup fail(tap):", error); }
       })
@@ -57,7 +53,6 @@ export class AuthService {
   }
 
   setUsername(name: string): void {
-    console.log("Storing username in localStorage:", name);
     localStorage.setItem('username',name);
     this.usernameSubject.next(name);
   }
